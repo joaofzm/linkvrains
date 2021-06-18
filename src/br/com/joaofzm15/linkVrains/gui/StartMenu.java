@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.ClickSound;
-import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.DuelBackgroundMusic;
 
 public class StartMenu extends JFrame implements ActionListener {
 	
@@ -23,9 +22,6 @@ public class StartMenu extends JFrame implements ActionListener {
 	private JButton exitButton;
 
 	public StartMenu() {
-
-		Thread menuBgMusic = new Thread(new DuelBackgroundMusic());
-//		menuBgMusic.start();
 
 		frame = new JFrame();
 		frame.setContentPane(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("window backgrounds/mainMenuBackground.jpg"))));
