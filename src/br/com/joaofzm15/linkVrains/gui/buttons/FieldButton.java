@@ -26,6 +26,13 @@ public abstract class FieldButton implements ActionListener, MouseListener {
 	}
 
 	private ImageIcon currentCardBigCard;
+	public ImageIcon getCurrentCardBigCard() {
+		return currentCardBigCard;
+	}
+	public void setCurrentCardBigCard(ImageIcon currentCardBigCard) {
+		this.currentCardBigCard = currentCardBigCard;
+	}
+
 
 	boolean occupied;
 
@@ -38,7 +45,7 @@ public abstract class FieldButton implements ActionListener, MouseListener {
 		Image temporaryOriginalImage = imageIcon.getImage();
 		Image temporaryBigImage = temporaryOriginalImage.getScaledInstance((int) 271, (int) 395,java.awt.Image.SCALE_SMOOTH);
 		ImageIcon resizedBigImageIcon = new ImageIcon(temporaryBigImage);
-		this.currentCardBigCard = resizedBigImageIcon;
+		this.setCurrentCardBigCard(resizedBigImageIcon);
 		
 		Image temporaryMiniImage = temporaryOriginalImage.getScaledInstance((int) 77.6, (int) 113.4,java.awt.Image.SCALE_SMOOTH);
 		ImageIcon resizedMiniImageIcon = new ImageIcon(temporaryMiniImage);
@@ -49,7 +56,7 @@ public abstract class FieldButton implements ActionListener, MouseListener {
 		this.button = new JButton();
 		this.duelFrame = duelFrame;
 		this.button.setBounds(xPos, yPos, (int) 77.76, (int) 113.4);
-		this.button.setBackground(new Color(0, 87, 255, 255));
+		this.button.setBackground(Color.black);
 		this.button.setBorder(BorderFactory.createLineBorder(Color.white));
 		this.button.addActionListener(this);
 		this.button.addMouseListener(this);
@@ -59,8 +66,8 @@ public abstract class FieldButton implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		if (this.currentCardBigCard != null) {
-			this.getDuelFrame().getCardInfo().setIcon(this.currentCardBigCard);
+		if (this.getCurrentCardBigCard() != null) {
+			this.getDuelFrame().getCardInfo().setIcon(this.getCurrentCardBigCard());
 		}
 	}
 
