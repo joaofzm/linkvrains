@@ -11,7 +11,7 @@ public class MenuBackgroundMusic implements Runnable {
 			soundEffectConverter.setFile(soundLocation);
 			soundEffectConverter.play();
 			try {
-				Thread.sleep(277000);
+				Thread.sleep(194000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
