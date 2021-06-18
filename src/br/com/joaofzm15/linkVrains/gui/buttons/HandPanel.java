@@ -2,6 +2,8 @@ package br.com.joaofzm15.linkVrains.gui.buttons;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -27,23 +29,31 @@ public class HandPanel {
 
 	int cardsInHand;
 
+	Timer timer;
+	TimerTask timerTask;
 	HandPanelFillerButton fillerButton1;
 	HandPanelFillerButton fillerButton2;
 	HandPanelFillerButton fillerButton3;
 	HandPanelFillerButton fillerButton4;
+
+	HandPanel thisHandPanelReference;
 
 	public HandPanel(DuelFrame duelFrame, int xPos, int yPos, int xSize, int ySize) {
 		this.panel = new JPanel();
 		this.duelFrame = duelFrame;
 		this.panel.setBounds(xPos, yPos, (int) xSize, (int) ySize);
 		this.panel.setBackground(Color.black);
-		this.panel.setBorder(BorderFactory.createLineBorder(Color.pink, 1));
+		this.panel.setBorder(BorderFactory.createLineBorder(Color.white, 1));
 		this.panel.setLayout(new GridLayout(1, 0));
 		this.duelFrame.getFrame().add(panel);
 		fillerButton1 = new HandPanelFillerButton(this);
 		fillerButton2 = new HandPanelFillerButton(this);
 		fillerButton3 = new HandPanelFillerButton(this);
 		fillerButton4 = new HandPanelFillerButton(this);
+
+		timer = new Timer();
+		
+		thisHandPanelReference = this;
 	}
 
 	public void fillHand() {
@@ -76,17 +86,41 @@ public class HandPanel {
 	public void drawCard() {
 		if (nextCardIndex < 20) {
 			new Thread(new DrawCardAnimation(this.duelFrame)).start();
-			HandPanelButton handCard = new HandPanelButton(this);
-			Card tempCard = this.duelFrame.getPlayerDeck().getDeckList().get(nextCardIndex);
+			Card tempCard = thisHandPanelReference.duelFrame.getPlayerDeck().getDeckList().get(nextCardIndex);
 			nextCardIndex++;
 			cardsInHand++;
-			fillHand();
-			handCard.setIcons(handCard.getImageIconFromCard(tempCard));
 			if (nextCardIndex >= 20) {
 				this.duelFrame.getPlayerDeckButton().getButton().setIcon(null);
+				this.duelFrame.getPlayerDeckButton().setCurrentCardBigCard(null);
 			}
 
+			timerTask = new TimerTask() {
+				@Override
+				public void run() {
+					HandPanelButton handCard = new HandPanelButton(thisHandPanelReference);
+					fillHand();
+					handCard.setIcons(handCard.getImageIconFromCard(tempCard));
+				};
+			};
+
+			timer.schedule(timerTask, 250);
 		}
+	}
+
+	public void multipleDraws(int numberOfCards) {
+		new Thread() {
+			public void run() {
+				for (int i = 0; i < numberOfCards; i++) {
+					new Thread() {
+						public void run() {
+							drawCard();
+						}
+					}.start();
+					try {Thread.sleep(600);} catch (InterruptedException e) {e.printStackTrace();}
+				}
+			}
+		}.start();
+
 	}
 
 }
