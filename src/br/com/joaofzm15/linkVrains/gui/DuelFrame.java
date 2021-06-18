@@ -65,6 +65,7 @@ public class DuelFrame extends JFrame implements ActionListener {
 	// ================================Test Buttons
 	JButton buttonTest2;
 	JButton buttonTest3;
+	JButton buttonTest4;
 
 	public JLabel labelTesteFire;
 	// ================================Test Buttons
@@ -117,6 +118,14 @@ public class DuelFrame extends JFrame implements ActionListener {
 		buttonTest3.setBounds(300, 500, 100, 100);
 		frame.add(buttonTest3);
 		
+		buttonTest4 = new JButton();
+		buttonTest4.setBorder(null);
+		buttonTest4.addActionListener(this);
+		buttonTest4.setBackground(null);
+		buttonTest4.setText("MultipleDraws");
+		buttonTest4.setBounds(100, 500, 100, 100);
+		frame.add(buttonTest4);
+
 		labelTesteFire = new JLabel();
 		labelTesteFire.setBounds((int) 910, (int) -390, (int) 1000, (int) 1130.4);
 		ImageIcon fire = new ImageIcon(StartMenu.class.getResource("fire.gif"));
@@ -132,7 +141,7 @@ public class DuelFrame extends JFrame implements ActionListener {
 		cardInfo = new JLabel();
 		cardInfo.setBounds(10, 10, 271, 395);
 		cardInfo.setBackground(Color.black);
-		cardInfo.setBorder(BorderFactory.createLineBorder(Color.white));
+//		cardInfo.setBorder(BorderFactory.createLineBorder(Color.orange));
 		cardInfo.setIcon(generalIcons.getBigCoverImageIcon());
 		frame.add(cardInfo);
 		
@@ -154,12 +163,12 @@ public class DuelFrame extends JFrame implements ActionListener {
 		playerMonsterZone1Defense.switchXandY();
 		playerMonsterZone1Defense.getButton().setVisible(false);
 
+
 		// 2
 		playerMonsterZone2 = new MonsterFieldButton(this, (int) 926.6, 350);
 		MonsterFieldButton playerMonsterZone2Defense = new MonsterFieldButton(this, (int) 908.78, (int) 367.82);
 		playerMonsterZone2Defense.switchXandY();
 		playerMonsterZone2Defense.getButton().setVisible(false);
-//		playerMonsterZone2.setIcons(playerMonsterZone1.getImageIconFromCard(getPlayerDeck().getDeckList().get(7)));
 		// 3
 		playerMonsterZone3 = new MonsterFieldButton(this, (int) 1040, 350);
 		MonsterFieldButton playerMonsterZone3Defense = new MonsterFieldButton(this, (int) 1022.18, (int) 367.82);
@@ -182,55 +191,81 @@ public class DuelFrame extends JFrame implements ActionListener {
 		playerBanished = new MiscFieldButton(this, (int) 1180, 320);
 		// ExtraDeck
 		playerExtraDeck = new MiscFieldButton(this, (int) 673.2, 580);
-		playerExtraDeck.setIcons(generalIcons.getCoverImageIcon());
+		playerExtraDeck.setIcons(generalIcons.getExtraCoverImageIcon());
 		// Field
 		playerField = new MiscFieldButton(this, (int) 673.2, 450);
 
 		// opponent
 		// Hand Panel
 		opponentHandPanel = new HandPanel(this, 760, (int) 7.6, 410, (int) 75.4);
+		opponentHandPanel.getPanel().setBorder(BorderFactory.createLineBorder(Color.orange, 1));
+
 		// monster zones
 		// 1
 		MonsterFieldButton opponentMonsterZone1 = new MonsterFieldButton(this, (int) 1040, (int) 220.8);
-		opponentMonsterZone1.getButton().setBackground(Color.yellow);
+		opponentMonsterZone1.getButton().setBackground(Color.black);
+		opponentMonsterZone1.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// 2
 		MonsterFieldButton opponentMonsterZone2 = new MonsterFieldButton(this, (int) 926.6, (int) 220.8);
-		opponentMonsterZone2.getButton().setBackground(Color.yellow);
+		opponentMonsterZone2.getButton().setBackground(Color.black);
+		opponentMonsterZone2.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// 3
 		MonsterFieldButton opponentMonsterZone3 = new MonsterFieldButton(this, (int) 813.2, (int) 220.8);
-		opponentMonsterZone3.getButton().setBackground(Color.yellow);
+		opponentMonsterZone3.getButton().setBackground(Color.black);
+		opponentMonsterZone3.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// spell zones
 		// 1
 		SpellTrapFieldButton opponentSpellZone1 = new SpellTrapFieldButton(this, (int) 1040, (int) 90.8);
-		opponentSpellZone1.getButton().setBackground(Color.yellow);
+		opponentSpellZone1.getButton().setBackground(Color.black);
+		opponentSpellZone1.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// 2
 		SpellTrapFieldButton opponentSpellZone2 = new SpellTrapFieldButton(this, (int) 926.6, (int) 90.8);
-		opponentSpellZone2.getButton().setBackground(Color.yellow);
+		opponentSpellZone2.getButton().setBackground(Color.black);
+		opponentSpellZone2.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// 3
 		SpellTrapFieldButton opponentSpellZone3 = new SpellTrapFieldButton(this, (int) 813.2, (int) 90.8);
-		opponentSpellZone3.getButton().setBackground(Color.yellow);
+		opponentSpellZone3.getButton().setBackground(Color.black);
+		opponentSpellZone3.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// other zones
 		// Deck
 		MiscFieldButton opponentDeck = new MiscFieldButton(this, (int) 673.2, (int) 26.6);
-		opponentDeck.getButton().setBackground(Color.yellow);
+		opponentDeck.getButton().setBackground(Color.black);
 		opponentDeck.setIcons(generalIcons.getCoverImageIcon());
+		opponentDeck.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// GY
 		MiscFieldButton opponentGy = new MiscFieldButton(this, (int) 673.2, (int) 156.6);
-		opponentGy.getButton().setBackground(Color.yellow);
+		opponentGy.getButton().setBackground(Color.black);
+		opponentGy.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// Banished
 		MiscFieldButton opponentBanished = new MiscFieldButton(this, (int) 673.2, (int) 286.6);
-		opponentBanished.getButton().setBackground(Color.yellow);
+		opponentBanished.getButton().setBackground(Color.black);
+		opponentBanished.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// ExtraDeck
 		MiscFieldButton opponentExtraDeck = new MiscFieldButton(this, (int) 1180, (int) 26.6);
-		opponentExtraDeck.setIcons(generalIcons.getCoverImageIcon());
-		opponentExtraDeck.getButton().setBackground(Color.yellow);
+		opponentExtraDeck.setIcons(generalIcons.getExtraCoverImageIcon());
+		opponentExtraDeck.getButton().setBackground(Color.black);
+		opponentExtraDeck.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
+
 		// Field
 		MiscFieldButton opponentField = new MiscFieldButton(this, (int) 1180, (int) 156.6);
-		opponentField.getButton().setBackground(Color.yellow);
+		opponentField.getButton().setBackground(Color.black);
+		opponentField.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
 
 
 		frame.pack();
 		frame.setVisible(true);
+
+		// starting hand
+		this.playerHandPanel.multipleDraws(5);
 
 	}
 
@@ -239,10 +274,16 @@ public class DuelFrame extends JFrame implements ActionListener {
 		if (e.getSource() == buttonTest3) {
 			playerHandPanel.drawCard();
 		}	
+
 		if (e.getSource() == buttonTest2) {
 			new Thread(new AttackAnimationTest(this)).start();
 			try {Thread.sleep(100);} catch (InterruptedException ex) {ex.printStackTrace();}
 		}	
+
+		if (e.getSource() == buttonTest4) {
+			playerHandPanel.multipleDraws(5);
+		}
+
 	}
 
 
