@@ -1,6 +1,7 @@
 package br.com.joaofzm15.linkVrains.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,32 +11,173 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import br.com.joaofzm15.linkVrains.decks.Deck;
-import br.com.joaofzm15.linkVrains.decks.JackAtlasDeck;
-import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.AttackAnimationTest;
+import br.com.joaofzm15.linkVrains.ai.AiActions;
+import br.com.joaofzm15.linkVrains.ai.AiTurns;
+import br.com.joaofzm15.linkVrains.decks.OpponentDeck;
+import br.com.joaofzm15.linkVrains.decks.PlayerDeck;
+import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.OpponentAttackAnimation;
+import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.RoundPassTextAnimation;
+import br.com.joaofzm15.linkVrains.gui.attackArrows.Arrow;
 import br.com.joaofzm15.linkVrains.gui.buttons.HandPanel;
 import br.com.joaofzm15.linkVrains.gui.buttons.MiscFieldButton;
-import br.com.joaofzm15.linkVrains.gui.buttons.MonsterFieldButton;
-import br.com.joaofzm15.linkVrains.gui.buttons.SpellTrapFieldButton;
+import br.com.joaofzm15.linkVrains.gui.buttons.OpponentMonsterFieldButton;
+import br.com.joaofzm15.linkVrains.gui.buttons.PlayerMonsterFieldButton;
 import br.com.joaofzm15.linkVrains.gui.imageIcons.GeneralIcons;
 
 public class DuelFrame extends JFrame implements ActionListener {
+	
+	private AiActions aiActions;
 
+	public AiActions getAiActions() {
+		return aiActions;
+	}
+
+	private AiTurns aiTurns;
+
+	public AiTurns getAiTurns() {
+		return aiTurns;
+	}
 
 	private GeneralIcons generalIcons = new GeneralIcons();
+
+	private PlayerEnablerDisabler playerEnablerDisabler = new PlayerEnablerDisabler(this);
+
+	public PlayerEnablerDisabler getPlayerEnablerDisabler() {
+		return playerEnablerDisabler;
+	}
+
+	private boolean sunIsPlacedOnTheField;
+	public boolean isSunPlacedOnTheField() {
+		return sunIsPlacedOnTheField;
+	}
+	public void setSunIsPlacedOnTheField(boolean sunIsPlacedOnTheField) {
+		this.sunIsPlacedOnTheField = sunIsPlacedOnTheField;
+	}
+	
+	private boolean manualTuneIsPlacedOnTheField;
+	public boolean isManualTunePlacedOnTheField() {
+		return manualTuneIsPlacedOnTheField;
+	}
+	public void setManualTuneIsPlacedOnTheField(boolean manualTuneIsPlacedOnTheField) {
+		this.manualTuneIsPlacedOnTheField = sunIsPlacedOnTheField;
+	}
+
+	private int glassesActivatedThisTurn;
+	public int isGlassesActivatedThisTurn() {
+		return glassesActivatedThisTurn;
+	}
+	public void add1ToGlassesActivatedThisTurn() {
+		glassesActivatedThisTurn++;
+	}
+	
+	private int microphoneActivatedThisTurn;
+
+	public int isMicrophonesActivatedThisTurn() {
+		return microphoneActivatedThisTurn;
+	}
+
+	public void add1ToMicrophonesActivatedThisTurn() {
+		microphoneActivatedThisTurn++;
+	}
+	
 
 	public GeneralIcons getGeneralIcons() {
 		return generalIcons;
 	}
 
-	private Deck playerDeck;
-	public Deck getPlayerDeck() {
+	private OpponentDeck opponentDeck;
+	public OpponentDeck getOpponentDeck() {
+		return opponentDeck;
+	}
+
+	private PlayerDeck playerDeck;
+	public PlayerDeck getPlayerDeck() {
 		return playerDeck;
 	}
 
 
-	private JFrame frame = new JFrame();
+	private JLabel warningsLabel;
 
+	public JLabel getWarningsLabel() {
+		return warningsLabel;
+	}
+
+//=========================================================================
+	private int currentRound = 1;
+
+	public int getCurrentRound() {
+		return currentRound;
+	}
+
+	private JLabel roundLabel;
+
+	public JLabel getRoundLabel() {
+		return roundLabel;
+	}
+
+	private int playerHp = 10000;
+	public int getPlayerHp() {
+		return playerHp;
+	}
+
+	public void setPlayerHp(int playerHp) {
+		this.playerHp = playerHp;
+		this.playerHpLabel.setText(String.valueOf(this.playerHp));
+
+	}
+	
+	private int opponentHp = 10000;
+	public int getOpponentHp() {
+		return opponentHp;
+	}
+	public void setOpponentHp(int opponentHp) {
+		this.opponentHp = opponentHp;
+		this.opponentHpLabel.setText(String.valueOf(this.opponentHp));
+	}
+	
+	private int playerMana = 1;
+	public int getPlayerMana() {
+		return playerMana;
+	}
+
+	public void setPlayerMana(int playerMana) {
+		this.playerMana = playerMana;
+		this.playerManaLabel.setText(String.valueOf(this.playerMana));
+	}
+	
+
+	private int opponentMana = 1;
+	public int getOpponentMana() {
+		return opponentMana;
+	}
+	public void setOpponentMana(int opponentMana) {
+		this.opponentMana = opponentMana;
+		this.opponentManaLabel.setText(String.valueOf(this.opponentMana));
+	}
+	
+	private JLabel playerHpLabel;
+	public JLabel getPlayerHpLabel() {
+		return playerHpLabel;
+	}
+
+	private JLabel playerManaLabel;
+
+	public JLabel getPlayerManaLabel() {
+		return playerManaLabel;
+	}
+
+	private JLabel opponentHpLabel;
+	public JLabel getOpponentHpLabel() {
+		return opponentHpLabel;
+	}
+
+	private JLabel opponentManaLabel;
+	public JLabel getOpponentMapaLabel() {
+		return opponentManaLabel;
+	}
+//=========================================================================
+
+	private JFrame frame = new JFrame();
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -46,20 +188,149 @@ public class DuelFrame extends JFrame implements ActionListener {
 		return drawCardAnimationLabel;
 	}
 
-	JLabel attackArrow;
+	private Arrow ArrowPlayer10;
+	private Arrow ArrowPlayer11;
+	private Arrow ArrowPlayer12;
+	private Arrow ArrowPlayer13;
+	private Arrow ArrowPlayer20;
+	private Arrow ArrowPlayer21;
+	private Arrow ArrowPlayer22;
+	private Arrow ArrowPlayer23;
+	private Arrow ArrowPlayer30;
+	private Arrow ArrowPlayer31;
+	private Arrow ArrowPlayer32;
+	private Arrow ArrowPlayer33;
 
-	public JLabel getAttackArrow() {
-		return attackArrow;
+	public Arrow getArrowPlayer10() {
+		return ArrowPlayer10;
 	}
 
-	HandPanel playerHandPanel;
+	public Arrow getArrowPlayer11() {
+		return ArrowPlayer11;
+	}
 
-	HandPanel opponentHandPanel;
+	public Arrow getArrowPlayer12() {
+		return ArrowPlayer12;
+	}
 
-	JLabel cardInfo;
+	public Arrow getArrowPlayer13() {
+		return ArrowPlayer13;
+	}
+
+	public Arrow getArrowPlayer20() {
+		return ArrowPlayer20;
+	}
+
+	public Arrow getArrowPlayer21() {
+		return ArrowPlayer21;
+	}
+
+	public Arrow getArrowPlayer22() {
+		return ArrowPlayer22;
+	}
+
+	public Arrow getArrowPlayer23() {
+		return ArrowPlayer23;
+	}
+
+	public Arrow getArrowPlayer30() {
+		return ArrowPlayer30;
+	}
+
+	public Arrow getArrowPlayer31() {
+		return ArrowPlayer31;
+	}
+
+	public Arrow getArrowPlayer32() {
+		return ArrowPlayer32;
+	}
+
+	public Arrow getArrowPlayer33() {
+		return ArrowPlayer33;
+	}
+
+	private Arrow ArrowOpponent10;
+	private Arrow ArrowOpponent11;
+	private Arrow ArrowOpponent12;
+	private Arrow ArrowOpponent13;
+	private Arrow ArrowOpponent20;
+	private Arrow ArrowOpponent21;
+	private Arrow ArrowOpponent22;
+	private Arrow ArrowOpponent23;
+	private Arrow ArrowOpponent30;
+	private Arrow ArrowOpponent31;
+	private Arrow ArrowOpponent32;
+	private Arrow ArrowOpponent33;
+
+	public Arrow getArrowOpponent10() {
+		return ArrowOpponent10;
+	}
+
+	public Arrow getArrowOpponent11() {
+		return ArrowOpponent11;
+	}
+
+	public Arrow getArrowOpponent12() {
+		return ArrowOpponent12;
+	}
+
+	public Arrow getArrowOpponent13() {
+		return ArrowOpponent13;
+	}
+
+	public Arrow getArrowOpponent20() {
+		return ArrowOpponent20;
+	}
+
+	public Arrow getArrowOpponent21() {
+		return ArrowOpponent21;
+	}
+
+	public Arrow getArrowOpponent22() {
+		return ArrowOpponent22;
+	}
+
+	public Arrow getArrowOpponent23() {
+		return ArrowOpponent23;
+	}
+
+	public Arrow getArrowOpponent30() {
+		return ArrowOpponent30;
+	}
+
+	public Arrow getArrowOpponent31() {
+		return ArrowOpponent31;
+	}
+
+	public Arrow getArrowOpponent32() {
+		return ArrowOpponent32;
+	}
+
+	public Arrow getArrowOpponent33() {
+		return ArrowOpponent33;
+	}
+
+	private HandPanel playerHandPanel;
+	public HandPanel getPlayerHandPanel() {
+		return playerHandPanel;
+	}
+
+	private HandPanel opponentHandPanel;
+	public HandPanel getOpponentHandPanel() {
+		return opponentHandPanel;
+	}
+
+
+	private JLabel cardInfo;
 
 	public JLabel getCardInfo() {
 		return cardInfo;
+	}
+
+	JLabel activatedCardLabel;
+
+	public JLabel getActivatedCardLabel() {
+		return activatedCardLabel;
 	}
 
 	// ================================Test Buttons
@@ -68,28 +339,75 @@ public class DuelFrame extends JFrame implements ActionListener {
 	JButton buttonTest4;
 
 	public JLabel labelTesteFire;
+
+	public JLabel getLabelTesteFire() {
+		return labelTesteFire;
+	}
+	public JLabel bloom;
+
+	public JLabel getBloom() {
+		return bloom;
+	}
 	// ================================Test Buttons
 
-	public MonsterFieldButton playerMonsterZone1;
-	public MonsterFieldButton playerMonsterZone2;
-	public MonsterFieldButton playerMonsterZone3;
-	public SpellTrapFieldButton playerSpellZone1;
-	public SpellTrapFieldButton playerSpellZone2;
-	public SpellTrapFieldButton playerSpellZone3;
+	JButton passRoundButton;
+	public JButton getPassRoundButton() {
+		return passRoundButton;
+	}
+
+	PlayerMonsterFieldButton playerMonsterZone1;
+	PlayerMonsterFieldButton playerMonsterZone2;
+	PlayerMonsterFieldButton playerMonsterZone3;
 	MiscFieldButton playerDeckButton;
-	MiscFieldButton playerGy;
-	MiscFieldButton playerBanished;
-	MiscFieldButton playerExtraDeck;
-	MiscFieldButton playerField;
+
+	public PlayerMonsterFieldButton getPlayerMonsterZone1() {
+		return playerMonsterZone1;
+	}
+
+	public PlayerMonsterFieldButton getPlayerMonsterZone2() {
+		return playerMonsterZone2;
+	}
+
+	public PlayerMonsterFieldButton getPlayerMonsterZone3() {
+		return playerMonsterZone3;
+	}
 
 	public MiscFieldButton getPlayerDeckButton() {
 		return playerDeckButton;
 	}
 
+	OpponentMonsterFieldButton opponentMonsterZone1;
+	OpponentMonsterFieldButton opponentMonsterZone2;
+	OpponentMonsterFieldButton opponentMonsterZone3;
+	MiscFieldButton opponentDeckButton;
+
+	public OpponentMonsterFieldButton getOpponentMonsterZone1() {
+		return opponentMonsterZone1;
+	}
+
+	public OpponentMonsterFieldButton getOpponentMonsterZone2() {
+		return opponentMonsterZone2;
+	}
+
+	public OpponentMonsterFieldButton getOpponentMonsterZone3() {
+		return opponentMonsterZone3;
+	}
+
+	public MiscFieldButton getOpponentDeckButton() {
+		return opponentDeckButton;
+	}
+
+	MiscFieldButton fieldButton;
+	public MiscFieldButton getFieldButton() {
+		return fieldButton;
+	}
 	public DuelFrame() {
-		
-		JackAtlasDeck jackAtlasDeck = new JackAtlasDeck();
-		playerDeck = jackAtlasDeck;
+
+		aiActions = new AiActions();
+		aiTurns = new AiTurns(this);
+
+		playerDeck = new PlayerDeck();
+		opponentDeck = new OpponentDeck();
 
 		frame.setContentPane(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("window backgrounds/boardBackground.jpg"))));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,13 +419,193 @@ public class DuelFrame extends JFrame implements ActionListener {
 		frame.setSize(1280, 720);
 		frame.setLocationRelativeTo(null);
 		
+		// ========================= Round ==============================
+		roundLabel = new JLabel();
+		roundLabel.setFont(new Font("Impact", Font.PLAIN, 23));
+		roundLabel.setText(String.valueOf("Round: " + currentRound));
+		roundLabel.setForeground(Color.yellow);
+		roundLabel.setBounds(806, 330, 100, 50);
+		roundLabel.setVisible(true);
+		frame.add(roundLabel);
+
+		passRoundButton = new JButton();
+		passRoundButton.setBorder(null);
+		passRoundButton.addActionListener(this);
+		passRoundButton.setBackground(null);
+		passRoundButton.setText("END ROUND");
+		passRoundButton.setFocusable(false);
+		passRoundButton.setForeground(Color.yellow);
+		passRoundButton.setBorder(BorderFactory.createLineBorder(Color.yellow, 1));
+		passRoundButton.setBackground(Color.black);
+		passRoundButton.setBounds(1026, 330, 75, 50);
+		frame.add(passRoundButton);
+
+		// ========================= Round ==============================
+
+		// ========================= HP and MANA BARS ==============================
+		playerHpLabel = new JLabel();
+		playerHpLabel.setFont(new Font("Impact", Font.PLAIN, 23));
+		playerHpLabel.setText(String.valueOf(playerHp));
+		playerHpLabel.setForeground(Color.red);
+		playerHpLabel.setBounds(686, 655, 60, 50);
+		playerHpLabel.setVisible(true);
+		frame.add(playerHpLabel);
+
+		playerManaLabel = new JLabel();
+		playerManaLabel.setFont(new Font("Impact", Font.PLAIN, 25));
+		playerManaLabel.setText("    " + String.valueOf(playerMana));
+		playerManaLabel.setForeground(Color.cyan);
+		playerManaLabel.setBounds(1194, 655, 50, 50);
+		playerManaLabel.setVisible(true);
+		frame.add(playerManaLabel);
+
+		opponentHpLabel = new JLabel();
+		opponentHpLabel.setFont(new Font("Impact", Font.PLAIN, 23));
+		opponentHpLabel.setText(String.valueOf(opponentHp));
+		opponentHpLabel.setForeground(Color.red);
+		opponentHpLabel.setBounds(686, 15, 60, 50);
+		opponentHpLabel.setVisible(true);
+		frame.add(opponentHpLabel);
+
+		opponentManaLabel = new JLabel();
+		opponentManaLabel.setFont(new Font("Impact", Font.PLAIN, 25));
+		opponentManaLabel.setText("    " + String.valueOf(opponentMana));
+		opponentManaLabel.setForeground(Color.cyan);
+		opponentManaLabel.setBounds(1194, 15, 50, 50);
+		opponentManaLabel.setVisible(true);
+		frame.add(opponentManaLabel);
+		// ========================= HP and MANA BARS ==============================
+
+
+		// ========================Attack Arrows====================================
+		ArrowPlayer10 = new Arrow(this, "resources/arrows/1-0.png");
+		ArrowPlayer11 = new Arrow(this, "resources/arrows/1-1.png");
+		ArrowPlayer12 = new Arrow(this, "resources/arrows/1-2.png");
+		ArrowPlayer13 = new Arrow(this, "resources/arrows/1-3.png");
+		ArrowPlayer20 = new Arrow(this, "resources/arrows/2-0.png");
+		ArrowPlayer21 = new Arrow(this, "resources/arrows/2-1.png");
+		ArrowPlayer22 = new Arrow(this, "resources/arrows/2-2.png");
+		ArrowPlayer23 = new Arrow(this, "resources/arrows/2-3.png");
+		ArrowPlayer30 = new Arrow(this, "resources/arrows/3-0.png");
+		ArrowPlayer31 = new Arrow(this, "resources/arrows/3-1.png");
+		ArrowPlayer32 = new Arrow(this, "resources/arrows/3-2.png");
+		ArrowPlayer33 = new Arrow(this, "resources/arrows/3-3.png");
+
+		ArrowOpponent10 = new Arrow(this, "resources/arrows/f1-0.png");
+		ArrowOpponent11 = new Arrow(this, "resources/arrows/f1-1.png");
+		ArrowOpponent12 = new Arrow(this, "resources/arrows/f1-2.png");
+		ArrowOpponent13 = new Arrow(this, "resources/arrows/f1-3.png");
+		ArrowOpponent20 = new Arrow(this, "resources/arrows/f2-0.png");
+		ArrowOpponent21 = new Arrow(this, "resources/arrows/f2-1.png");
+		ArrowOpponent22 = new Arrow(this, "resources/arrows/f2-2.png");
+		ArrowOpponent23 = new Arrow(this, "resources/arrows/f2-3.png");
+		ArrowOpponent30 = new Arrow(this, "resources/arrows/f3-0.png");
+		ArrowOpponent31 = new Arrow(this, "resources/arrows/f3-1.png");
+		ArrowOpponent32 = new Arrow(this, "resources/arrows/f3-2.png");
+		ArrowOpponent33 = new Arrow(this, "resources/arrows/f3-3.png");
+		// ========================Attack Arrows====================================
+
+
+
+		labelTesteFire = new JLabel();
+		getLabelTesteFire().setBounds((int) 910, (int) -345, (int) 1000, (int) 1130.4);
+		ImageIcon fire = new ImageIcon(StartMenu.class.getResource("fire.gif"));
+		getLabelTesteFire().setIcon(fire);
+		getLabelTesteFire().setVisible(false);
+		frame.add(getLabelTesteFire());
+
+		bloom = new JLabel();
+		getBloom().setBounds((int) 813, (int) 350, (int) 77, (int) 113);
+		ImageIcon bloomIcon = new ImageIcon(StartMenu.class.getResource("bloom.gif"));
+		getBloom().setIcon(bloomIcon);
+		getBloom().setVisible(false);
+		frame.add(getBloom());
+
+		//Used solely for the draw card animation.
+		drawCardAnimationLabel.setVisible(false);
+		frame.add(drawCardAnimationLabel);
+
+
+
+		// warning label----------------------------------------
+		warningsLabel = new JLabel();
+		warningsLabel.setFont(new Font("Impact", Font.PLAIN, 30));
+		warningsLabel.setBounds(400, 300, 800, 100);
+		warningsLabel.setForeground(Color.white);
+		warningsLabel.setVisible(false);
+		frame.add(warningsLabel);
+		// warning label----------------------------------------
+
+		cardInfo = new JLabel();
+		cardInfo.setBounds(10, 10, 271, 395);
+		cardInfo.setBackground(Color.black);
+		cardInfo.setIcon(generalIcons.getBigCoverImageIcon());
+		frame.add(cardInfo);
+		
+		activatedCardLabel = new JLabel();
+		activatedCardLabel.setBounds(830, 163, 271, 395);
+		activatedCardLabel.setBackground(Color.black);
+		activatedCardLabel.setIcon(generalIcons.getBigCoverImageIcon());
+		activatedCardLabel.setVisible(false);
+		frame.add(activatedCardLabel);
+
+		// player
+		// Hand Panel
+		playerHandPanel = new HandPanel(this, 760, 600, 410, (int) 113.4);
+		// monster zones
+		// 1
+		playerMonsterZone1 = new PlayerMonsterFieldButton(this, (int) 813.2, 450);
+		// 2
+		playerMonsterZone2 = new PlayerMonsterFieldButton(this, (int) 926.6, 450);
+		// 3
+		playerMonsterZone3 = new PlayerMonsterFieldButton(this, (int) 1040, 450);
+		// other zones
+		// Deck
+		playerDeckButton = new MiscFieldButton(this, (int) 1180, 530);
+		getPlayerDeckButton().setIcons(generalIcons.getCoverImageIcon());
+		// Field
+		fieldButton = new MiscFieldButton(this, (int) 926.2, 303);
+		fieldButton.getButton().setBorder(BorderFactory.createLineBorder(new Color(50, 50, 255)));
+
+		// opponent
+		// Hand Panel
+		opponentHandPanel = new HandPanel(this, 760, (int) 7.6, 410, (int) 113.4);
+		opponentHandPanel.getPanel().setBorder(BorderFactory.createLineBorder(new Color(255, 104, 0), 1));
+
+		// monster zones
+		// 1
+		opponentMonsterZone1 = new OpponentMonsterFieldButton(this, (int) 1040, (int) 156.6);
+		opponentMonsterZone1.getButton().setBackground(Color.black);
+		opponentMonsterZone1.getButton().setBorder(BorderFactory.createLineBorder(new Color(255, 104, 0)));
+
+//		opponentMonsterZone1.setIcons(this.getOpponentMonsterZone1().getImageIconFromCard(opponentDeck.getDeckArrayList().get(4)));
+
+		// 2
+		opponentMonsterZone2 = new OpponentMonsterFieldButton(this, (int) 926.6, (int) 156.6);
+		opponentMonsterZone2.getButton().setBackground(Color.black);
+		opponentMonsterZone2.getButton().setBorder(BorderFactory.createLineBorder(new Color(255, 104, 0)));
+
+		// 3
+		opponentMonsterZone3 = new OpponentMonsterFieldButton(this, (int) 813.2, (int) 156.6);
+		opponentMonsterZone3.getButton().setBackground(Color.black);
+		opponentMonsterZone3.getButton().setBorder(BorderFactory.createLineBorder(new Color(255, 104, 0)));
+		// other zones
+		// Deck
+		opponentDeckButton = new MiscFieldButton(this, (int) 673.2, (int) 76.6);
+		opponentDeckButton.getButton().setBackground(Color.black);
+		opponentDeckButton.setIcons(generalIcons.getCoverImageIcon());
+		opponentDeckButton.getButton().setBorder(BorderFactory.createLineBorder(new Color(255, 104, 0)));
+
+		frame.pack();
+		frame.setVisible(true);
+
 		// ================================Test Buttons
 		buttonTest2 = new JButton();
 		buttonTest2.setBorder(null);
 		buttonTest2.addActionListener(this);
 		buttonTest2.setBackground(null);
-		buttonTest2.setText("Attack");
-		buttonTest2.setBounds(500, 500, 100, 100);
+		buttonTest2.setText("Enable");
+		buttonTest2.setBounds(100, 500, 100, 100);
 		frame.add(buttonTest2);
 
 		buttonTest3 = new JButton();
@@ -115,176 +613,82 @@ public class DuelFrame extends JFrame implements ActionListener {
 		buttonTest3.addActionListener(this);
 		buttonTest3.setBackground(null);
 		buttonTest3.setText("Draw");
-		buttonTest3.setBounds(300, 500, 100, 100);
+		buttonTest3.setBounds(200, 500, 100, 100);
 		frame.add(buttonTest3);
-		
+
 		buttonTest4 = new JButton();
 		buttonTest4.setBorder(null);
 		buttonTest4.addActionListener(this);
 		buttonTest4.setBackground(null);
-		buttonTest4.setText("MultipleDraws");
-		buttonTest4.setBounds(100, 500, 100, 100);
+		buttonTest4.setText("Disable");
+		buttonTest4.setBounds(300, 500, 100, 100);
 		frame.add(buttonTest4);
-
-		labelTesteFire = new JLabel();
-		labelTesteFire.setBounds((int) 910, (int) -390, (int) 1000, (int) 1130.4);
-		ImageIcon fire = new ImageIcon(StartMenu.class.getResource("fire.gif"));
-		labelTesteFire.setIcon(fire);
-		labelTesteFire.setVisible(false);
-		frame.add(labelTesteFire);
 		// ================================Test Buttons
 
-		//Used solely for the draw card animation.
-		drawCardAnimationLabel.setVisible(true);
-		frame.add(drawCardAnimationLabel);
-
-		cardInfo = new JLabel();
-		cardInfo.setBounds(10, 10, 271, 395);
-		cardInfo.setBackground(Color.black);
-//		cardInfo.setBorder(BorderFactory.createLineBorder(Color.orange));
-		cardInfo.setIcon(generalIcons.getBigCoverImageIcon());
-		frame.add(cardInfo);
-		
-		attackArrow = new JLabel();
-		attackArrow.setBounds(0, 0, 1280, 720);
-		ImageIcon arrowImage = new ImageIcon(StartMenu.class.getResource("testeSeta.png"));
-		attackArrow.setIcon(arrowImage);
-		attackArrow.setVisible(false);
-		frame.add(attackArrow);
-
-		//player
-		// Hand Panel
-		playerHandPanel = new HandPanel(this, 760, 600, 410, (int) 113.4);
-
-		// monster zones
-		// 1
-		playerMonsterZone1 = new MonsterFieldButton(this, (int) 813.2, 350);
-		MonsterFieldButton playerMonsterZone1Defense = new MonsterFieldButton(this, (int) 795.38, (int) 367.82);
-		playerMonsterZone1Defense.switchXandY();
-		playerMonsterZone1Defense.getButton().setVisible(false);
-
-
-		// 2
-		playerMonsterZone2 = new MonsterFieldButton(this, (int) 926.6, 350);
-		MonsterFieldButton playerMonsterZone2Defense = new MonsterFieldButton(this, (int) 908.78, (int) 367.82);
-		playerMonsterZone2Defense.switchXandY();
-		playerMonsterZone2Defense.getButton().setVisible(false);
-		// 3
-		playerMonsterZone3 = new MonsterFieldButton(this, (int) 1040, 350);
-		MonsterFieldButton playerMonsterZone3Defense = new MonsterFieldButton(this, (int) 1022.18, (int) 367.82);
-		playerMonsterZone3Defense.switchXandY();
-		playerMonsterZone3Defense.getButton().setVisible(false);
-		// spell zones
-		// 1
-		playerSpellZone1 = new SpellTrapFieldButton(this, (int) 813.2, 480);
-		// 2
-		playerSpellZone2 = new SpellTrapFieldButton(this, (int) 926.6, 480);
-		// 3
-		playerSpellZone3 = new SpellTrapFieldButton(this, (int) 1040, 480);
-		// other zones
-		// Deck
-		playerDeckButton = new MiscFieldButton(this, (int) 1180, 580);
-		getPlayerDeckButton().setIcons(generalIcons.getCoverImageIcon());
-		// GY
-		playerGy = new MiscFieldButton(this, (int) 1180, 450);
-		// Banished
-		playerBanished = new MiscFieldButton(this, (int) 1180, 320);
-		// ExtraDeck
-		playerExtraDeck = new MiscFieldButton(this, (int) 673.2, 580);
-		playerExtraDeck.setIcons(generalIcons.getExtraCoverImageIcon());
-		// Field
-		playerField = new MiscFieldButton(this, (int) 673.2, 450);
-
-		// opponent
-		// Hand Panel
-		opponentHandPanel = new HandPanel(this, 760, (int) 7.6, 410, (int) 75.4);
-		opponentHandPanel.getPanel().setBorder(BorderFactory.createLineBorder(Color.orange, 1));
-
-		// monster zones
-		// 1
-		MonsterFieldButton opponentMonsterZone1 = new MonsterFieldButton(this, (int) 1040, (int) 220.8);
-		opponentMonsterZone1.getButton().setBackground(Color.black);
-		opponentMonsterZone1.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// 2
-		MonsterFieldButton opponentMonsterZone2 = new MonsterFieldButton(this, (int) 926.6, (int) 220.8);
-		opponentMonsterZone2.getButton().setBackground(Color.black);
-		opponentMonsterZone2.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// 3
-		MonsterFieldButton opponentMonsterZone3 = new MonsterFieldButton(this, (int) 813.2, (int) 220.8);
-		opponentMonsterZone3.getButton().setBackground(Color.black);
-		opponentMonsterZone3.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// spell zones
-		// 1
-		SpellTrapFieldButton opponentSpellZone1 = new SpellTrapFieldButton(this, (int) 1040, (int) 90.8);
-		opponentSpellZone1.getButton().setBackground(Color.black);
-		opponentSpellZone1.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// 2
-		SpellTrapFieldButton opponentSpellZone2 = new SpellTrapFieldButton(this, (int) 926.6, (int) 90.8);
-		opponentSpellZone2.getButton().setBackground(Color.black);
-		opponentSpellZone2.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// 3
-		SpellTrapFieldButton opponentSpellZone3 = new SpellTrapFieldButton(this, (int) 813.2, (int) 90.8);
-		opponentSpellZone3.getButton().setBackground(Color.black);
-		opponentSpellZone3.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// other zones
-		// Deck
-		MiscFieldButton opponentDeck = new MiscFieldButton(this, (int) 673.2, (int) 26.6);
-		opponentDeck.getButton().setBackground(Color.black);
-		opponentDeck.setIcons(generalIcons.getCoverImageIcon());
-		opponentDeck.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// GY
-		MiscFieldButton opponentGy = new MiscFieldButton(this, (int) 673.2, (int) 156.6);
-		opponentGy.getButton().setBackground(Color.black);
-		opponentGy.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// Banished
-		MiscFieldButton opponentBanished = new MiscFieldButton(this, (int) 673.2, (int) 286.6);
-		opponentBanished.getButton().setBackground(Color.black);
-		opponentBanished.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// ExtraDeck
-		MiscFieldButton opponentExtraDeck = new MiscFieldButton(this, (int) 1180, (int) 26.6);
-		opponentExtraDeck.setIcons(generalIcons.getExtraCoverImageIcon());
-		opponentExtraDeck.getButton().setBackground(Color.black);
-		opponentExtraDeck.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-		// Field
-		MiscFieldButton opponentField = new MiscFieldButton(this, (int) 1180, (int) 156.6);
-		opponentField.getButton().setBackground(Color.black);
-		opponentField.getButton().setBorder(BorderFactory.createLineBorder(Color.orange));
-
-
-		frame.pack();
-		frame.setVisible(true);
 
 		// starting hand
 		this.playerHandPanel.multipleDraws(5);
+		this.opponentHandPanel.multipleDrawsOpponent(5);
+
+		opponentMonsterZone1.setOccupied(true);
+
+	}
+
+	public void passRound() {
+		playerMonsterZone1.setAttackedThisTurn(false);
+		playerMonsterZone2.setAttackedThisTurn(false);
+		playerMonsterZone3.setAttackedThisTurn(false);
+		opponentMonsterZone1.setAttackedThisTurn(false);
+		opponentMonsterZone2.setAttackedThisTurn(false);
+		opponentMonsterZone3.setAttackedThisTurn(false);
+		playerMonsterZone1.setPower(playerMonsterZone1.getPower() - (1000 * glassesActivatedThisTurn));
+		playerMonsterZone2.setPower(playerMonsterZone2.getPower() - (1000 * glassesActivatedThisTurn));
+		playerMonsterZone3.setPower(playerMonsterZone3.getPower() - (1000 * glassesActivatedThisTurn));
+		glassesActivatedThisTurn = 0;
+		opponentMonsterZone1.setPower(opponentMonsterZone1.getPower() - (1000 * microphoneActivatedThisTurn));
+		opponentMonsterZone2.setPower(opponentMonsterZone2.getPower() - (1000 * microphoneActivatedThisTurn));
+		opponentMonsterZone3.setPower(opponentMonsterZone3.getPower() - (1000 * microphoneActivatedThisTurn));
+		microphoneActivatedThisTurn = 0;
+
+		this.currentRound++;
+		this.roundLabel.setText("Round: " + currentRound);
+		new Thread(new RoundPassTextAnimation(this)).start();
+		this.setPlayerMana(currentRound);
+		this.setOpponentMana(currentRound);
+		if (currentRound % 2 == 0) {
+			opponentHandPanel.drawCardOpponent();
+		} else {
+			playerHandPanel.drawCard();
+		}
+
+		if (currentRound == 2) {
+			aiTurns.aiTurn2();
+		} else if (currentRound == 4) {
+			aiTurns.aiTurn4();
+		} else if (currentRound == 6) {
+			aiTurns.aiTurn6();
+		} else if (currentRound == 8) {
+			aiTurns.aiTurn8();
+		}
 
 	}
 
 	@Override
 	public synchronized void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonTest3) {
-			playerHandPanel.drawCard();
-		}	
+//			playerHandPanel.drawCard();
+			opponentHandPanel.drawCardOpponent();
 
-		if (e.getSource() == buttonTest2) {
-			new Thread(new AttackAnimationTest(this)).start();
-			try {Thread.sleep(100);} catch (InterruptedException ex) {ex.printStackTrace();}
-		}	
+		} else if (e.getSource() == buttonTest2) {
+//			playerEnablerDisabler.enablePlayer();
+			new Thread(new OpponentAttackAnimation(this, opponentMonsterZone1.getButton(), 1)).start();
+		} else if (e.getSource() == buttonTest4) {
+//			playerEnablerDisabler.disablePlayer();
 
-		if (e.getSource() == buttonTest4) {
-			playerHandPanel.multipleDraws(5);
+		} else if (e.getSource() == passRoundButton) {
+			passRound();
 		}
 
 	}
-
 
 }
