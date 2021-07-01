@@ -38,14 +38,14 @@ public class GeneralIcons {
 		return bigExtraCoverImageIcon;
 	}
 	public ImageIcon resizeToMini(ImageIcon original) {
-		Image temporaryOriginalImage = original.getImage(); //Transforms original ImageIcon to Image.
-		Image temporaryMiniImage = temporaryOriginalImage.getScaledInstance((int) 77.6, (int) 113.4, java.awt.Image.SCALE_SMOOTH); //Resize converted image to preferred size.
+		Image temporaryOriginalImage = original.getImage(); 
+		Image temporaryMiniImage = temporaryOriginalImage.getScaledInstance((int) 77.6, (int) 113.4, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon resizedMiniImageIcon = new ImageIcon(temporaryMiniImage);
 		return resizedMiniImageIcon;
 	}
 	
 	public ImageIcon resizeToBig(ImageIcon original) {
-		Image temporaryOriginalImage = original.getImage(); //Transforms original ImageIcon to Image.
+		Image temporaryOriginalImage = original.getImage(); 
 		Image temporaryBigImage = temporaryOriginalImage.getScaledInstance((int) 271, (int) 395, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon resizedBigImageIcon = new ImageIcon(temporaryBigImage);
 		return resizedBigImageIcon;
