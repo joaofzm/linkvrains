@@ -34,9 +34,15 @@ public class StartMenu extends JFrame implements ActionListener {
 		frame.setSize(1280, 720);
 		frame.setLocationRelativeTo(null);
 
+		/*
+		 * The loading label is used to sign the user the game is loading after you
+		 * click play, since it'll take a few seconds for the duel frame to fully load
+		 * and pop on screen. It's invisible by default, and will be set to visible once
+		 * the user clicks the "startButton".
+		 */
 		loading = new JLabel();
-		loading.setBounds(540, 310, 300, 100);
-		loading.setFont(new Font("Arial", Font.PLAIN, 45));
+		loading.setBounds(540, 320, 300, 100);
+		loading.setFont(new Font("Impact", Font.PLAIN, 45));
 		loading.setForeground(Color.white);
 		loading.setText("Loading....");
 		loading.setBackground(Color.BLACK);
@@ -86,6 +92,11 @@ public class StartMenu extends JFrame implements ActionListener {
 
 		new Thread(new ClickSound()).start();
 
+		/*
+		 * The game has to load on a separate thread, otherwise the StartMenu frame
+		 * would freeze and the LOADING message wouldn't appear on screen while the game
+		 * is loading.
+		 */
 		if (e.getSource() == startButton) {
 			loading.setVisible(true);
 			startButton.setEnabled(false);
@@ -97,16 +108,18 @@ public class StartMenu extends JFrame implements ActionListener {
 					frame.dispose();
 				}
 			}.start();
+		}
 
-		} else if (e.getSource()==optionsButton) {
+		if (e.getSource() == optionsButton) {
 			frame.dispose();
 			new OptionsMenu();
+		}
 
-
-		} else if(e.getSource()==exitButton) {
+		if (e.getSource() == exitButton) {
 			try {Thread.sleep(900);} catch (InterruptedException e1) {e1.printStackTrace();}
 			System.exit(0);
 		}		
+
 	}
 	
 }
