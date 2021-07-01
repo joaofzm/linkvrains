@@ -3,72 +3,27 @@ package br.com.joaofzm15.linkVrains.cards;
 import br.com.joaofzm15.linkVrains.decks.Deck;
 
 public class ExtraMonsterCard extends Card {
-	private int atk;
-	private int def;
+	private int power;
 	private int level;
-	private String type;
 	private String attribute;
-	private boolean tuner = false;
-	private String typeOfCard;
 
-	public ExtraMonsterCard(Deck deck,String iconCode, int atk, int def, int level, String type, String attribute, int tuner, String typeOfCard) {
+	public ExtraMonsterCard(Deck deck, String iconCode, int power, int level, String attribute) {
 		super(deck, iconCode);
-		this.atk = atk;
-		this.def = def;
+		this.power = power;
 		this.level = level;
-		this.type = type;
 		this.attribute = attribute;
-		if (tuner == 1) {
-			this.tuner = true;
-		}
-		this.typeOfCard = typeOfCard;
 	}
 
 	public int getAtk() {
-		return atk;
-	}
-
-	public void setAtk(int atk) {
-		this.atk = atk;
-	}
-
-	public int getDef() {
-		return def;
-	}
-
-	public void setDef(int def) {
-		this.def = def;
+		return power;
 	}
 
 	public int getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public String getAttribute() {
 		return attribute;
 	}
 
-	public void setAttribute(String attribute) {
-		this.attribute = attribute;
-	}
-
-	public boolean isTuner() {
-		return tuner;
-	}
-
-	public void setTuner(boolean tuner) {
-		this.tuner = tuner;
-	}
 }
