@@ -1,59 +1,48 @@
 package br.com.joaofzm15.linkVrains.gui.buttons;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
-import br.com.joaofzm15.linkVrains.cards.Card;
 import br.com.joaofzm15.linkVrains.gui.DuelFrame;
 
-public abstract class FieldButton implements ActionListener, MouseListener {
+public abstract class FieldButton extends CardButton implements ActionListener, MouseListener {
 
+	/*
+	 * All the slots that make the field are instances of this class.
+	 * 
+	 * While this class is called FieldButton, it's not a button and only contains a
+	 * button, as well as other properties. The button must be accessed with
+	 * "fieldButton.getButton()".
+	 */
+
+	/*
+	 * The buttons must be part of a duelFrame, and one is required as a parameter
+	 * in the constructor.
+	 */
 	private DuelFrame duelFrame;
 	public DuelFrame getDuelFrame() {
 		return duelFrame;
 	}
 
-	private JButton button;
-	public JButton getButton() {
-		return button;
+	private boolean occupied;
+	public boolean isOccupied() {
+		return occupied;
 	}
 
-	private ImageIcon currentCardBigCard;
-	public ImageIcon getCurrentCardBigCard() {
-		return currentCardBigCard;
-	}
-	public void setCurrentCardBigCard(ImageIcon currentCardBigCard) {
-		this.currentCardBigCard = currentCardBigCard;
+	public void setOccupied(boolean occupied) {
+		this.occupied = occupied;
 	}
 
-
-	boolean occupied;
-
-	public ImageIcon getImageIconFromCard(Card card) {
-		ImageIcon temporaryImageIcon = new ImageIcon(getClass().getClassLoader().getResource("cards/"+card.getIconCode()+".jpg"));
-		return temporaryImageIcon;
-	}
-
-	public void setIcons(ImageIcon imageIcon) {
-		Image temporaryOriginalImage = imageIcon.getImage();
-		Image temporaryBigImage = temporaryOriginalImage.getScaledInstance((int) 271, (int) 395,java.awt.Image.SCALE_SMOOTH);
-		ImageIcon resizedBigImageIcon = new ImageIcon(temporaryBigImage);
-		this.setCurrentCardBigCard(resizedBigImageIcon);
-		
-		Image temporaryMiniImage = temporaryOriginalImage.getScaledInstance((int) 77.6, (int) 113.4,java.awt.Image.SCALE_SMOOTH);
-		ImageIcon resizedMiniImageIcon = new ImageIcon(temporaryMiniImage);
-		this.getButton().setIcon(resizedMiniImageIcon);
-	}
-
+	/*
+	 * The constructor will automatically add the button to the DueLFrame passed as
+	 * a parameter.
+	 */
 	public FieldButton(DuelFrame duelFrame, int xPos, int yPos) {
-		this.button = new JButton();
+		super();
 		this.duelFrame = duelFrame;
 		this.button.setBounds(xPos, yPos, (int) 77.76, (int) 113.4);
 		this.button.setBackground(Color.black);
@@ -64,6 +53,12 @@ public abstract class FieldButton implements ActionListener, MouseListener {
 		this.duelFrame.getFrame().add(button);
 	}
 
+	
+	
+	/*
+	 * As the mouse enters the button, the big card stored in this class will update
+	 * the icon of the cardInfo label(from DuelFrame).
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (this.getCurrentCardBigCard() != null) {
@@ -78,20 +73,16 @@ public abstract class FieldButton implements ActionListener, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
-
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
