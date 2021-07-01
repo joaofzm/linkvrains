@@ -22,8 +22,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
 	public OptionsMenu() {
 
 		frame = new JFrame();
-		frame.setContentPane(new JLabel(
-				new ImageIcon(getClass().getClassLoader().getResource("window backgrounds/optionsBackground.jpg"))));
+		frame.setContentPane(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("window backgrounds/optionsBackground.jpg"))));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		ImageIcon yusaku = new ImageIcon(OptionsMenu.class.getResource("yuseiIcon.jpg"));
