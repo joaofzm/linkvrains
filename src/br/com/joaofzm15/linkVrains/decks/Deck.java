@@ -5,18 +5,16 @@ import java.util.List;
 
 import br.com.joaofzm15.linkVrains.cards.Card;
 
-public class Deck {
+public abstract class Deck {
 
-	private List<Card> deckList = new ArrayList<Card>();
+	/*
+	 * The Card constructor receives a Deck as a parameter, and automatically adds
+	 * the just created Card this class array list.
+	 */
+	private List<Card> deckArrayList = new ArrayList<Card>();
 
-	private List<Card> extraDeckList = new ArrayList<Card>();
-
-	public List<Card> getDeckList() {
-		return deckList;
-	}
-
-	public List<Card> getExtraDeckList() {
-		return extraDeckList;
+	public List<Card> getDeckArrayList() {
+		return deckArrayList;
 	}
 
 }
