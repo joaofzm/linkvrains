@@ -24,6 +24,10 @@ public class PlayerMonsterFieldButton extends FieldButton {
 		return attackButton;
 	}
 
+	public void removePowerButton() {
+		this.getButton().remove(powerButton);
+	}
+
 	private boolean attackedThisTurn;
 
 	public boolean hasAttackedThisTurn() {
