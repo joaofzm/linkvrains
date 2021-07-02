@@ -34,12 +34,17 @@ public class OpponentMonsterFieldButton extends FieldButton {
 		return powerButton;
 	}
 
+	public void removePowerButton() {
+		this.getButton().remove(powerButton);
+	}
+
 	private int power;
 	public int getPower() {
 		return power;
 	}
 	public void setPower(int power) {
 		this.power = power;
+		powerButton.setText(String.valueOf(power));
 	}
 
 	public OpponentMonsterFieldButton(DuelFrame duelFrame, int xPos, int yPos) {
