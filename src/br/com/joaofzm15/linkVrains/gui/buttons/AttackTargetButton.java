@@ -44,16 +44,82 @@ public class AttackTargetButton implements ActionListener, MouseListener {
 
 		if (this.getMonsterFieldButton() == this.getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1()) {
 			new Thread(new AttackAnimation(this.getMonsterFieldButton().getDuelFrame(),	playerMonsterButtonThatClickedTheAttackButton.getButton(), 1)).start();
-			// Damage calc and destruction here
+			new Thread() {
+				public void run() {
+					try {Thread.sleep(2000);} catch (InterruptedException e) {e.printStackTrace();}
+					
+					if (playerMonsterButtonThatClickedTheAttackButton.getPower() > getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().getPower()) {
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().setOccupied(false);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().getButton().setIcon(null);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().removePowerButton();
+					} else if (playerMonsterButtonThatClickedTheAttackButton.getPower() < getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().getPower()) {
+						playerMonsterButtonThatClickedTheAttackButton.setOccupied(false);
+						playerMonsterButtonThatClickedTheAttackButton.getButton().setIcon(null);
+						playerMonsterButtonThatClickedTheAttackButton.removePowerButton();
+					} else {
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().setOccupied(false);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().getButton().setIcon(null);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().removePowerButton();
+						playerMonsterButtonThatClickedTheAttackButton.setOccupied(false);
+						playerMonsterButtonThatClickedTheAttackButton.getButton().setIcon(null);
+						playerMonsterButtonThatClickedTheAttackButton.removePowerButton();
+					}
+				}
+			}.start();
+
+			
 			
 		} else if (this.getMonsterFieldButton() == this.getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2()) {
 			new Thread(new AttackAnimation(this.getMonsterFieldButton().getDuelFrame(),	playerMonsterButtonThatClickedTheAttackButton.getButton(), 2)).start();
-			// Damage calc and destruction here
+			new Thread() {
+				public void run() {
+					try {Thread.sleep(2000);} catch (InterruptedException e) {e.printStackTrace();}
+					
+					if (playerMonsterButtonThatClickedTheAttackButton.getPower() > getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().getPower()) {
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().setOccupied(false);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().getButton().setIcon(null);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().removePowerButton();
+					} else if (playerMonsterButtonThatClickedTheAttackButton.getPower() < getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().getPower()) {
+						playerMonsterButtonThatClickedTheAttackButton.setOccupied(false);
+						playerMonsterButtonThatClickedTheAttackButton.getButton().setIcon(null);
+						playerMonsterButtonThatClickedTheAttackButton.removePowerButton();
+					} else {
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().setOccupied(false);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().getButton().setIcon(null);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().removePowerButton();
+						playerMonsterButtonThatClickedTheAttackButton.setOccupied(false);
+						playerMonsterButtonThatClickedTheAttackButton.getButton().setIcon(null);
+						playerMonsterButtonThatClickedTheAttackButton.removePowerButton();
+					}
+				}
+			}.start();
 
 		} else if (this.getMonsterFieldButton() == this.getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3()) {
+			new Thread() {
+				public void run() {
+					try {Thread.sleep(2000);} catch (InterruptedException e) {e.printStackTrace();}
+					
+					if (playerMonsterButtonThatClickedTheAttackButton.getPower() > getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().getPower()) {
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().setOccupied(false);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().getButton().setIcon(null);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().removePowerButton();
+					} else if (playerMonsterButtonThatClickedTheAttackButton.getPower() < getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().getPower()) {
+						playerMonsterButtonThatClickedTheAttackButton.setOccupied(false);
+						playerMonsterButtonThatClickedTheAttackButton.getButton().setIcon(null);
+						playerMonsterButtonThatClickedTheAttackButton.removePowerButton();
+					} else {
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().setOccupied(false);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().getButton().setIcon(null);
+						getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().removePowerButton();
+						playerMonsterButtonThatClickedTheAttackButton.setOccupied(false);
+						playerMonsterButtonThatClickedTheAttackButton.getButton().setIcon(null);
+						playerMonsterButtonThatClickedTheAttackButton.removePowerButton();
+					}
+				}
+			}.start();
+			
 			new Thread(new AttackAnimation(this.getMonsterFieldButton().getDuelFrame(),	playerMonsterButtonThatClickedTheAttackButton.getButton(), 3)).start();
-			// Damage calc and destruction here
-
+			
 		}
 
 		playerMonsterButtonThatClickedTheAttackButton.setAttackedThisTurn(true);
