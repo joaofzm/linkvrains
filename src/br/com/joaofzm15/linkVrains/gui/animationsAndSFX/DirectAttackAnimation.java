@@ -12,7 +12,6 @@ public class DirectAttackAnimation implements Runnable {
 	int attackingButton;
 	private String soundLocation;
 	private String soundLocation2;
-	private int target;
 	private SoundEffectConverter soundEffectConverter = new SoundEffectConverter();
 
 	int xPos = 0;
