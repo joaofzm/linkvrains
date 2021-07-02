@@ -15,7 +15,6 @@ import br.com.joaofzm15.linkVrains.ai.AiActions;
 import br.com.joaofzm15.linkVrains.ai.AiTurns;
 import br.com.joaofzm15.linkVrains.decks.OpponentDeck;
 import br.com.joaofzm15.linkVrains.decks.PlayerDeck;
-import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.OpponentAttackAnimation;
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.RoundPassTextAnimation;
 import br.com.joaofzm15.linkVrains.gui.attackArrows.Arrow;
 import br.com.joaofzm15.linkVrains.gui.buttons.HandPanel;
@@ -59,7 +58,7 @@ public class DuelFrame extends JFrame implements ActionListener {
 		return manualTuneIsPlacedOnTheField;
 	}
 	public void setManualTuneIsPlacedOnTheField(boolean manualTuneIsPlacedOnTheField) {
-		this.manualTuneIsPlacedOnTheField = sunIsPlacedOnTheField;
+		this.manualTuneIsPlacedOnTheField = manualTuneIsPlacedOnTheField;
 	}
 
 	private int glassesActivatedThisTurn;
@@ -630,8 +629,6 @@ public class DuelFrame extends JFrame implements ActionListener {
 		this.playerHandPanel.multipleDraws(5);
 		this.opponentHandPanel.multipleDrawsOpponent(5);
 
-		opponentMonsterZone1.setOccupied(true);
-
 	}
 
 	public void passRound() {
@@ -661,14 +658,8 @@ public class DuelFrame extends JFrame implements ActionListener {
 			playerHandPanel.drawCard();
 		}
 
-		if (currentRound == 2) {
-			aiTurns.aiTurn2();
-		} else if (currentRound == 4) {
-			aiTurns.aiTurn4();
-		} else if (currentRound == 6) {
-			aiTurns.aiTurn6();
-		} else if (currentRound == 8) {
-			aiTurns.aiTurn8();
+		if (currentRound % 2 == 0) {
+			aiTurns.aiTurn();
 		}
 
 	}
@@ -676,14 +667,12 @@ public class DuelFrame extends JFrame implements ActionListener {
 	@Override
 	public synchronized void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonTest3) {
-//			playerHandPanel.drawCard();
-			opponentHandPanel.drawCardOpponent();
 
 		} else if (e.getSource() == buttonTest2) {
-//			playerEnablerDisabler.enablePlayer();
-			new Thread(new OpponentAttackAnimation(this, opponentMonsterZone1.getButton(), 1)).start();
+			aiActions.attack(playerMonsterZone2, opponentMonsterZone1);
+
 		} else if (e.getSource() == buttonTest4) {
-//			playerEnablerDisabler.disablePlayer();
+			aiActions.directAttack(opponentMonsterZone2);
 
 		} else if (e.getSource() == passRoundButton) {
 			passRound();
