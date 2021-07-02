@@ -91,7 +91,14 @@ public class AttackButton implements ActionListener, MouseListener {
 			new Thread(new FixButtonLayoutThread(this.getMonsterFieldButton().getDuelFrame())).start();
 			
 			new Thread(new DirectAttackAnimation(this.getMonsterFieldButton().getDuelFrame(), this.getMonsterFieldButton().getButton())).start();
-			this.getMonsterFieldButton().getDuelFrame().setOpponentHp(getMonsterFieldButton().getDuelFrame().getOpponentHp()-this.getMonsterFieldButton().getPower());
+
+			// Damage Calculation
+			new Thread() {
+				public void run() {
+					try {Thread.sleep(2000);} catch (InterruptedException e) {e.printStackTrace();}
+					getMonsterFieldButton().getDuelFrame().setOpponentHp(getMonsterFieldButton().getDuelFrame().getOpponentHp()-getMonsterFieldButton().getPower());
+				}
+			}.start();
 
 		}
 	}
