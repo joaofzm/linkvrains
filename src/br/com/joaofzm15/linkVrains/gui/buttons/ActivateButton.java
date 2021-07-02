@@ -39,6 +39,11 @@ public class ActivateButton extends ActionButton {
 				|| this.getHandPanelButton().getCard() == this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerDeck().getGlasses3()) {
 			this.glasses();
 		}
+		
+		if (this.getHandPanelButton().getCard() == this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerDeck().getTears1()
+				|| this.getHandPanelButton().getCard() == this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerDeck().getTears1()) {
+			this.tears();
+		}
 
 		new Thread(new FixButtonLayoutThread(this.getHandPanelButton().getHandPanel().getDuelFrame())).start();
 	}
