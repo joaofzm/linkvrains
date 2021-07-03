@@ -1,5 +1,7 @@
 package br.com.joaofzm15.linkVrains.gui.animationsAndSFX;
 
+import java.awt.Font;
+
 import br.com.joaofzm15.linkVrains.gui.DuelFrame;
 
 public class RoundPassTextAnimation implements Runnable {
@@ -17,7 +19,8 @@ public class RoundPassTextAnimation implements Runnable {
 	public void run() {
 		soundEffectConverter.setFile(soundPath);
 		soundEffectConverter.play();
-		this.duelFrame.getWarningsLabel().setText("ROUND: " + this.duelFrame.getCurrentRound());
+		this.duelFrame.getWarningsLabel().setFont(new Font("Impact", Font.PLAIN, 50));
+		this.duelFrame.getWarningsLabel().setText("             ROUND: " + this.duelFrame.getCurrentRound());
 		duelFrame.getWarningsLabel().setVisible(true);
 		try {
 			Thread.sleep(1100);
