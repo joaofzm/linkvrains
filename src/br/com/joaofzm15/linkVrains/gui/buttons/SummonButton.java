@@ -24,6 +24,8 @@ public class SummonButton extends ActionButton {
 				new Thread(new SummonAnimation(this.getHandPanelButton().getHandPanel().getDuelFrame(), (int) 926.6, 450)).start();
 				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone2().setIcons(this.getHandPanelButton().getCurrentCardBigCard());
 				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone2().setOccupied(true);
+				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone2()
+						.setAttackedThisTurn(false);
 				
 				this.getHandPanelButton().getHandPanel().getPanel().remove(this.getHandPanelButton().getButton());
 				this.getHandPanelButton().getHandPanel().remove1FromCardsInHand();
@@ -47,6 +49,8 @@ public class SummonButton extends ActionButton {
 				new Thread(new SummonAnimation(this.getHandPanelButton().getHandPanel().getDuelFrame(), (int) 813.2, 450)).start();
 				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone1().setIcons(this.getHandPanelButton().getCurrentCardBigCard());
 				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone1().setOccupied(true);
+				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone1()
+						.setAttackedThisTurn(false);
 				
 				this.getHandPanelButton().getHandPanel().getPanel().remove(this.getHandPanelButton().getButton());
 				this.getHandPanelButton().getHandPanel().remove1FromCardsInHand();
@@ -72,6 +76,8 @@ public class SummonButton extends ActionButton {
 				new Thread(new SummonAnimation(this.getHandPanelButton().getHandPanel().getDuelFrame(), 1040, 450)).start();
 				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone3().setIcons(this.getHandPanelButton().getCurrentCardBigCard());
 				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone3().setOccupied(true);
+				this.getHandPanelButton().getHandPanel().getDuelFrame().getPlayerMonsterZone3()
+						.setAttackedThisTurn(false);
 				
 				this.getHandPanelButton().getHandPanel().getPanel().remove(this.getHandPanelButton().getButton());
 				this.getHandPanelButton().getHandPanel().remove1FromCardsInHand();
