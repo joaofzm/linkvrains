@@ -1,5 +1,7 @@
 package br.com.joaofzm15.linkVrains.decks;
 
+import java.util.Collections;
+
 import br.com.joaofzm15.linkVrains.cards.Card;
 import br.com.joaofzm15.linkVrains.cards.FieldCard;
 import br.com.joaofzm15.linkVrains.cards.MonsterCard;
@@ -63,7 +65,6 @@ public class OpponentDeck extends Deck {
 		keyboard1 = new MonsterCard(this, "8", 1000, 1);
 		keyboard2 = new MonsterCard(this, "8", 1000, 1);
 		keyboard3 = new MonsterCard(this, "8", 1000, 1);
-		manualTune1 = new FieldCard(this, "14");
 		trumpet1 = new MonsterCard(this, "9", 3000, 3);
 		trumpet2 = new MonsterCard(this, "9", 3000, 3);
 		trumpet3 = new MonsterCard(this, "9", 3000, 3);
@@ -78,8 +79,9 @@ public class OpponentDeck extends Deck {
 		microphone1 = new SpellCard(this, "13");
 		microphone2 = new SpellCard(this, "13");
 		microphone3 = new SpellCard(this, "13");
+		manualTune1 = new FieldCard(this, "14");
 		manualTune2 = new FieldCard(this, "14");
 		manualTune3 = new FieldCard(this, "14");
-//		Collections.shuffle(this.getDeckArrayList());
+		Collections.shuffle(this.getDeckArrayList());
 	}
 }
