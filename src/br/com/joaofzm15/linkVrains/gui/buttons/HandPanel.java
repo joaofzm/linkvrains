@@ -194,9 +194,9 @@ public class HandPanel {
 					}
 					fillHand();
 					handButtonOfNewDrawCard.setIcons(handButtonOfNewDrawCard.getImageIconFromCard(tempCard));
-//					handButtonOfNewDrawCard.getButton().setIcon(getDuelFrame().getGeneralIcons().getMiniCoverImageIcon());
-//					handButtonOfNewDrawCard.getButton().setDisabledIcon(getDuelFrame().getGeneralIcons().getMiniCoverImageIcon());
-//					handButtonOfNewDrawCard.setCurrentCardBigCard(getDuelFrame().getGeneralIcons().getBigCoverImageIcon());
+					handButtonOfNewDrawCard.getButton().setIcon(getDuelFrame().getGeneralIcons().getMiniCoverImageIcon());
+					handButtonOfNewDrawCard.getButton().setDisabledIcon(getDuelFrame().getGeneralIcons().getMiniCoverImageIcon());
+					handButtonOfNewDrawCard.setCurrentCardBigCard(getDuelFrame().getGeneralIcons().getBigCoverImageIcon());
 					handButtonOfNewDrawCard.getButton().setEnabled(false);
 				};
 			};
