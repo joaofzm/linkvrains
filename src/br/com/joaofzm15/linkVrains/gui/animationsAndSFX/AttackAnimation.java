@@ -122,6 +122,8 @@ public class AttackAnimation implements Runnable {
 
 	@Override
 	public void run() {
+		duelFrame.getPlayerEnablerDisabler().disablePlayer();
+
 		Arrow arrowReference = returnArrowByButtonAndTarget();
 		arrowReference.getArrowLabel().setVisible(true);
 		soundEffectConverter.setFile(soundLocation);
@@ -187,6 +189,8 @@ public class AttackAnimation implements Runnable {
 			button.setBounds(xPos, yPos, (int) 77.76, (int) 113.4);
 			try {Thread.sleep(5);} catch (InterruptedException e) {e.printStackTrace();}
 		}
+
+		duelFrame.getPlayerEnablerDisabler().enablePlayer();
 
 		// ------------------------------------------------------------------------------------
 
