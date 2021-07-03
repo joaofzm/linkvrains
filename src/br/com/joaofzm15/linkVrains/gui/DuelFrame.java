@@ -15,7 +15,10 @@ import br.com.joaofzm15.linkVrains.ai.AiActions;
 import br.com.joaofzm15.linkVrains.ai.AiTurns;
 import br.com.joaofzm15.linkVrains.decks.OpponentDeck;
 import br.com.joaofzm15.linkVrains.decks.PlayerDeck;
+import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.ClickSound;
+import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.DefeatSound;
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.RoundPassTextAnimation;
+import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.VictorySound;
 import br.com.joaofzm15.linkVrains.gui.attackArrows.Arrow;
 import br.com.joaofzm15.linkVrains.gui.buttons.HandPanel;
 import br.com.joaofzm15.linkVrains.gui.buttons.MiscFieldButton;
@@ -25,6 +28,20 @@ import br.com.joaofzm15.linkVrains.gui.imageIcons.GeneralIcons;
 
 public class DuelFrame extends JFrame implements ActionListener {
 	
+	private JButton returnToMenuButton;
+
+	public JButton getReturnToMenuButton() {
+		return returnToMenuButton;
+	}
+
+	private boolean playerAlive = true;
+	public boolean isPlayerAlive() {
+		return playerAlive;
+	}
+	public void setPlayerAlive(boolean playerAlive) {
+		this.playerAlive = playerAlive;
+	}
+
 	private AiActions aiActions;
 
 	public AiActions getAiActions() {
@@ -121,7 +138,7 @@ public class DuelFrame extends JFrame implements ActionListener {
 
 	public void setPlayerHp(int playerHp) {
 		this.playerHp = playerHp;
-		this.playerHpLabel.setText(String.valueOf(this.playerHp));
+		this.playerHpButton.setText(String.valueOf(this.playerHp));
 
 	}
 	
@@ -131,7 +148,7 @@ public class DuelFrame extends JFrame implements ActionListener {
 	}
 	public void setOpponentHp(int opponentHp) {
 		this.opponentHp = opponentHp;
-		this.opponentHpLabel.setText(String.valueOf(this.opponentHp));
+		this.opponentHpButton.setText(String.valueOf(this.opponentHp));
 	}
 	
 	private int playerMana = 1;
@@ -141,7 +158,7 @@ public class DuelFrame extends JFrame implements ActionListener {
 
 	public void setPlayerMana(int playerMana) {
 		this.playerMana = playerMana;
-		this.playerManaLabel.setText(String.valueOf(this.playerMana));
+		this.playerManaButton.setText(String.valueOf(this.playerMana));
 	}
 	
 
@@ -151,28 +168,31 @@ public class DuelFrame extends JFrame implements ActionListener {
 	}
 	public void setOpponentMana(int opponentMana) {
 		this.opponentMana = opponentMana;
-		this.opponentManaLabel.setText(String.valueOf(this.opponentMana));
+		this.opponentManaButton.setText(String.valueOf(this.opponentMana));
 	}
 	
-	private JLabel playerHpLabel;
-	public JLabel getPlayerHpLabel() {
-		return playerHpLabel;
+	private JButton playerHpButton;
+
+	public JButton getPlayerHpLabel() {
+		return playerHpButton;
 	}
 
-	private JLabel playerManaLabel;
+	private JButton playerManaButton;
 
-	public JLabel getPlayerManaLabel() {
-		return playerManaLabel;
+	public JButton getPlayerManaButton() {
+		return playerManaButton;
 	}
 
-	private JLabel opponentHpLabel;
-	public JLabel getOpponentHpLabel() {
-		return opponentHpLabel;
+	private JButton opponentHpButton;
+
+	public JButton getOpponentHpButton() {
+		return opponentHpButton;
 	}
 
-	private JLabel opponentManaLabel;
-	public JLabel getOpponentMapaLabel() {
-		return opponentManaLabel;
+	private JButton opponentManaButton;
+
+	public JButton getOpponentMapaButton() {
+		return opponentManaButton;
 	}
 //=========================================================================
 
@@ -185,6 +205,18 @@ public class DuelFrame extends JFrame implements ActionListener {
 
 	public JLabel getDrawCardAnimationLabel() {
 		return drawCardAnimationLabel;
+	}
+
+	private JLabel youWinLabel;
+
+	public JLabel getYouWinLabel() {
+		return youWinLabel;
+	}
+
+	private JLabel youLoseLabel;
+
+	public JLabel getYouLoseLabel() {
+		return youLoseLabel;
 	}
 
 	private Arrow ArrowPlayer10;
@@ -333,9 +365,9 @@ public class DuelFrame extends JFrame implements ActionListener {
 	}
 
 	// ================================Test Buttons
-	JButton buttonTest2;
-	JButton buttonTest3;
-	JButton buttonTest4;
+//	JButton buttonTest2;
+//	JButton buttonTest3;
+//	JButton buttonTest4;
 
 	public JLabel labelTesteFire;
 
@@ -418,6 +450,35 @@ public class DuelFrame extends JFrame implements ActionListener {
 		frame.setSize(1280, 720);
 		frame.setLocationRelativeTo(null);
 		
+		returnToMenuButton = new JButton();
+		returnToMenuButton.setBounds(225, 630, 150, 50);
+		returnToMenuButton.addActionListener(this);
+		returnToMenuButton.setText("MAIN MENU");
+		returnToMenuButton.setFont(new Font("Impact", Font.BOLD, 22));
+		returnToMenuButton.setForeground(Color.white);
+		returnToMenuButton.setBackground(new Color(255, 105, 0));
+		returnToMenuButton.setBorder(BorderFactory.createLineBorder(Color.white));
+		returnToMenuButton.setFocusable(false);
+		frame.add(returnToMenuButton);
+
+		// ======================Win / Lose
+
+		youWinLabel = new JLabel();
+		youWinLabel.setBounds(0, 0, 1280, 720);
+		ImageIcon winMessageGif = new ImageIcon("resources/messages/youWin.gif");
+		youWinLabel.setIcon(winMessageGif);
+		youWinLabel.setVisible(false);
+		frame.add(youWinLabel);
+
+		youLoseLabel = new JLabel();
+		youLoseLabel.setBounds(0, 0, 1280, 720);
+		ImageIcon LoseMessageGif = new ImageIcon("resources/messages/youLose.gif");
+		youLoseLabel.setIcon(LoseMessageGif);
+		youLoseLabel.setVisible(false);
+		frame.add(youLoseLabel);
+
+		// ======================Win / Lose
+
 		// ========================= Round ==============================
 		roundLabel = new JLabel();
 		roundLabel.setFont(new Font("Impact", Font.PLAIN, 23));
@@ -442,37 +503,45 @@ public class DuelFrame extends JFrame implements ActionListener {
 		// ========================= Round ==============================
 
 		// ========================= HP and MANA BARS ==============================
-		playerHpLabel = new JLabel();
-		playerHpLabel.setFont(new Font("Impact", Font.PLAIN, 23));
-		playerHpLabel.setText(String.valueOf(playerHp));
-		playerHpLabel.setForeground(Color.red);
-		playerHpLabel.setBounds(686, 655, 60, 50);
-		playerHpLabel.setVisible(true);
-		frame.add(playerHpLabel);
+		playerHpButton = new JButton();
+		playerHpButton.setFont(new Font("Impact", Font.PLAIN, 17));
+		playerHpButton.setText(String.valueOf(playerHp));
+		playerHpButton.setForeground(Color.white);
+		playerHpButton.setBackground(Color.red);
+		playerHpButton.setFocusable(false);
+		playerHpButton.setBounds((int) 673.2, 655, (int) 77.76, 50);
+		playerHpButton.setVisible(true);
+		frame.add(playerHpButton);
 
-		playerManaLabel = new JLabel();
-		playerManaLabel.setFont(new Font("Impact", Font.PLAIN, 25));
-		playerManaLabel.setText("    " + String.valueOf(playerMana));
-		playerManaLabel.setForeground(Color.cyan);
-		playerManaLabel.setBounds(1194, 655, 50, 50);
-		playerManaLabel.setVisible(true);
-		frame.add(playerManaLabel);
+		playerManaButton = new JButton();
+		playerManaButton.setFont(new Font("Impact", Font.PLAIN, 25));
+		playerManaButton.setText(String.valueOf(playerMana));
+		playerManaButton.setForeground(Color.white);
+		playerManaButton.setFocusable(false);
+		playerManaButton.setBackground(new Color(15, 60, 255));
+		playerManaButton.setBounds(1180, 655, (int) 77.76, 50);
+		playerManaButton.setVisible(true);
+		frame.add(playerManaButton);
 
-		opponentHpLabel = new JLabel();
-		opponentHpLabel.setFont(new Font("Impact", Font.PLAIN, 23));
-		opponentHpLabel.setText(String.valueOf(opponentHp));
-		opponentHpLabel.setForeground(Color.red);
-		opponentHpLabel.setBounds(686, 15, 60, 50);
-		opponentHpLabel.setVisible(true);
-		frame.add(opponentHpLabel);
+		opponentHpButton = new JButton();
+		opponentHpButton.setFont(new Font("Impact", Font.PLAIN, 17));
+		opponentHpButton.setText(String.valueOf(opponentHp));
+		opponentHpButton.setForeground(Color.white);
+		opponentHpButton.setBackground(Color.red);
+		opponentHpButton.setFocusable(false);
+		opponentHpButton.setBounds(1180, 15, (int) 77.76, 50);
+		opponentHpButton.setVisible(true);
+		frame.add(opponentHpButton);
 
-		opponentManaLabel = new JLabel();
-		opponentManaLabel.setFont(new Font("Impact", Font.PLAIN, 25));
-		opponentManaLabel.setText("    " + String.valueOf(opponentMana));
-		opponentManaLabel.setForeground(Color.cyan);
-		opponentManaLabel.setBounds(1194, 15, 50, 50);
-		opponentManaLabel.setVisible(true);
-		frame.add(opponentManaLabel);
+		opponentManaButton = new JButton();
+		opponentManaButton.setFont(new Font("Impact", Font.PLAIN, 25));
+		opponentManaButton.setText(String.valueOf(opponentMana));
+		opponentManaButton.setForeground(Color.white);
+		opponentManaButton.setFocusable(false);
+		opponentManaButton.setBackground(new Color(15, 60, 255));
+		opponentManaButton.setBounds((int) 673.2, 15, (int) 77.76, 50);
+		opponentManaButton.setVisible(true);
+		frame.add(opponentManaButton);
 		// ========================= HP and MANA BARS ==============================
 
 
@@ -536,7 +605,7 @@ public class DuelFrame extends JFrame implements ActionListener {
 		// warning label----------------------------------------
 
 		cardInfo = new JLabel();
-		cardInfo.setBounds(10, 10, 271, 395);
+		cardInfo.setBounds(162, 50, 271, 395);
 		cardInfo.setBackground(Color.black);
 		cardInfo.setIcon(generalIcons.getBigCoverImageIcon());
 		frame.add(cardInfo);
@@ -598,36 +667,20 @@ public class DuelFrame extends JFrame implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 
-		// ================================Test Buttons
-		buttonTest2 = new JButton();
-		buttonTest2.setBorder(null);
-		buttonTest2.addActionListener(this);
-		buttonTest2.setBackground(null);
-		buttonTest2.setText("Enable");
-		buttonTest2.setBounds(100, 500, 100, 100);
-		frame.add(buttonTest2);
-
-		buttonTest3 = new JButton();
-		buttonTest3.setBorder(null);
-		buttonTest3.addActionListener(this);
-		buttonTest3.setBackground(null);
-		buttonTest3.setText("Draw");
-		buttonTest3.setBounds(200, 500, 100, 100);
-		frame.add(buttonTest3);
-
-		buttonTest4 = new JButton();
-		buttonTest4.setBorder(null);
-		buttonTest4.addActionListener(this);
-		buttonTest4.setBackground(null);
-		buttonTest4.setText("Disable");
-		buttonTest4.setBounds(300, 500, 100, 100);
-		frame.add(buttonTest4);
-		// ================================Test Buttons
-
 
 		// starting hand
-		this.playerHandPanel.multipleDraws(5);
-		this.opponentHandPanel.multipleDrawsOpponent(5);
+		new Thread() {
+			public void run() {
+				playerEnablerDisabler.disablePlayer();
+				for (int i =0; i<4; i++) {
+					playerHandPanel.drawCard();
+					try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
+					opponentHandPanel.drawCardOpponent();
+					try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
+				}
+				playerEnablerDisabler.enablePlayer();
+			}
+		}.start();
 
 	}
 
@@ -664,17 +717,27 @@ public class DuelFrame extends JFrame implements ActionListener {
 
 	}
 
+	public void youWin() {
+		getYouWinLabel().setVisible(true);
+		playerEnablerDisabler.disablePlayer();
+		new Thread(new VictorySound()).start();
+
+	}
+
+	public void youLose() {
+		getYouLoseLabel().setVisible(true);
+		playerEnablerDisabler.disablePlayer();
+		new Thread(new DefeatSound()).start();
+
+	}
 	@Override
 	public synchronized void actionPerformed(ActionEvent e) {
-		if (e.getSource() == buttonTest3) {
-
-		} else if (e.getSource() == buttonTest2) {
-			aiActions.attack(playerMonsterZone2, opponentMonsterZone1);
-
-		} else if (e.getSource() == buttonTest4) {
-			aiActions.directAttack(opponentMonsterZone2);
-
+		if (e.getSource() == returnToMenuButton) {
+			new Thread(new ClickSound()).start();
+			frame.dispose();
+			new StartMenu();
 		} else if (e.getSource() == passRoundButton) {
+			new Thread(new ClickSound()).start();
 			passRound();
 		}
 
