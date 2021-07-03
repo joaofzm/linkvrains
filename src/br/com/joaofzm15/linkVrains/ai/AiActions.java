@@ -1,6 +1,7 @@
 package br.com.joaofzm15.linkVrains.ai;
 
 import java.awt.Image;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -8,7 +9,6 @@ import br.com.joaofzm15.linkVrains.cards.MonsterCard;
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.ActivateAnimation;
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.AllZonesOccupiedWarning;
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.FixButtonLayoutThread;
-import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.InsufficientManaWarning;
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.OpponentAttackAnimation;
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.OpponentDirectAttackAnimation;
 import br.com.joaofzm15.linkVrains.gui.animationsAndSFX.SummonAnimation;
@@ -27,9 +27,7 @@ public class AiActions {
 		} else {
 			target = 3;
 		}
-		
 		new Thread(new OpponentAttackAnimation(pmfb.getDuelFrame(), omfb.getButton(), target)).start();
-		
 		new Thread() {
 			public void run() {
 				try {Thread.sleep(2000);} catch (InterruptedException e) {e.printStackTrace();}
@@ -52,7 +50,6 @@ public class AiActions {
 				}
 			}
 		}.start();
-
 	}
 
 	public void directAttack( OpponentMonsterFieldButton omfb) {
@@ -62,6 +59,9 @@ public class AiActions {
 			public void run() {
 				try {Thread.sleep(2000);} catch (InterruptedException e) {e.printStackTrace();}
 				omfb.getDuelFrame().setPlayerHp(omfb.getDuelFrame().getPlayerHp() - omfb.getPower());
+				if (omfb.getDuelFrame().getPlayerHp() < 0) {
+					omfb.getDuelFrame().setPlayerHp(0);
+				}
 			}
 		}.start();
 
@@ -78,7 +78,117 @@ public class AiActions {
 	}
 	
 	public void headphone(HandPanelButton handPanelButton) {
+		if (handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().isOccupied()
+				|| handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().isOccupied()
+				|| handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().isOccupied()) {
+
+			// Creating this booleans make the code easier to read, although it's useless.
+			boolean oneOccupied = false;
+			boolean twoOccupied = false;
+			boolean threeOccupied = false;
+			if (handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().isOccupied()) {
+				oneOccupied = true;
+			}
+			if (handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().isOccupied()) {
+				twoOccupied = true;
+			}
+			if (handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().isOccupied()) {
+				threeOccupied = true;
+			}
+
+			int totalPossibilities = 0;
+			if (oneOccupied) {
+				totalPossibilities++;
+			}
+			if (twoOccupied) {
+				totalPossibilities++;
+			}
+			if (threeOccupied) {
+				totalPossibilities++;
+			}
+
+			Random random = new Random();
+			int randomNumber = 0;
+			if (totalPossibilities == 2) {
+				randomNumber = random.nextInt((2 - 1) + 1) + 1;
+			} else if (totalPossibilities == 3) {
+				randomNumber = random.nextInt(3 - 1 + 1) + 1;
+			}
+
+			// ===========================================================================
+
+			if (oneOccupied && !twoOccupied && !threeOccupied) {
+				// Destroy one
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().setOccupied(false);
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().getButton().setIcon(null);
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().removePowerButton();
+
+			} else if (oneOccupied && twoOccupied && !threeOccupied) {
+				// Destroy one or two
+				if (randomNumber == 1) {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().removePowerButton();
+				} else {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().removePowerButton();
+				}
 		
+			} else if (oneOccupied && !twoOccupied && threeOccupied) {
+				// Destroy one or three
+				if (randomNumber == 1) {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().removePowerButton();
+				} else {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().removePowerButton();
+				}
+
+			} else if (!oneOccupied && twoOccupied && !threeOccupied) {
+				// Destroy two
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().setOccupied(false);
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().getButton().setIcon(null);
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().removePowerButton();
+
+			} else if (!oneOccupied && twoOccupied && threeOccupied) {
+				// Destroy two or three
+				if (randomNumber == 1) {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().removePowerButton();
+				} else {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().removePowerButton();
+				}
+
+			} else if (!oneOccupied && !twoOccupied && threeOccupied) {
+				// Destroy three
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().setOccupied(false);
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().getButton().setIcon(null);
+				handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().removePowerButton();
+			}
+
+			else if (oneOccupied && twoOccupied && threeOccupied) {
+				// Destroy one two or three
+				if (randomNumber == 1) {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone1().removePowerButton();
+				} else if (randomNumber == 2) {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone2().removePowerButton();
+				} else {
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().setOccupied(false);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().getButton().setIcon(null);
+					handPanelButton.getHandPanel().getDuelFrame().getPlayerMonsterZone3().removePowerButton();
+				}
+			}
+		}
 	}
 	
 	public void manualTune(HandPanelButton handPanelButton) {
@@ -210,7 +320,6 @@ public class AiActions {
 			}
 		
 		} else {
-			new Thread(new InsufficientManaWarning(handPanelButton.getHandPanel().getDuelFrame())).start();
 			new Thread(new FixButtonLayoutThread(handPanelButton.getHandPanel().getDuelFrame())).start();
 			return false;
 		}
