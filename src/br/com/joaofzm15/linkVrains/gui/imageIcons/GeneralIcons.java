@@ -10,10 +10,6 @@ public class GeneralIcons {
 	private ImageIcon miniCoverImageIcon = resizeToMini(coverImageIcon);
 	private  ImageIcon bigCoverImageIcon = resizeToBig(coverImageIcon);
 	
-	private  ImageIcon extraCoverImageIcon = new ImageIcon(getClass().getClassLoader().getResource("general cards/extracover.jpg"));
-	private ImageIcon miniExtraCoverImageIcon = resizeToMini(extraCoverImageIcon);
-	private  ImageIcon bigExtraCoverImageIcon = resizeToBig(extraCoverImageIcon);
-
 	public ImageIcon getCoverImageIcon() {
 		return coverImageIcon;
 	}
@@ -26,17 +22,6 @@ public class GeneralIcons {
 		return bigCoverImageIcon;
 	}
 
-	public ImageIcon getExtraCoverImageIcon() {
-		return extraCoverImageIcon;
-	}
-
-	public ImageIcon getMiniExtraCoverImageIcon() {
-		return miniExtraCoverImageIcon;
-	}
-
-	public ImageIcon getBigExtraCoverImageIcon() {
-		return bigExtraCoverImageIcon;
-	}
 	public ImageIcon resizeToMini(ImageIcon original) {
 		Image temporaryOriginalImage = original.getImage(); 
 		Image temporaryMiniImage = temporaryOriginalImage.getScaledInstance((int) 77.6, (int) 113.4, java.awt.Image.SCALE_SMOOTH);
