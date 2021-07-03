@@ -1,0 +1,30 @@
+Background Music:
+"Pacing" by Chad Crouch
+License: Attribuition - NonCommercial 3.0 International License.
+Source: https://freemusicarchive.org/music/Chad_Crouch/Drifter/Pacing_1820
+Acess: 2nd July 2021.
+---------------------------------------------------------------------------------------------------
+
+clickSound.wav:
+Original: 506053__mellau__button-click-2
+License: Attribution Noncommercial License.
+Source: https://freesound.org/people/Mellau/sounds/506053/
+Acess: 2nd July 2021.
+
+attack.wav:
+Original: 518887__ash-rez__damage
+License: Creative Commons 0 License.
+Source: https://freesound.org/people/ash_rez/sounds/518887/
+Acess: 2nd July 2021.
+
+victory.wav:
+Original: 341984__unadamlar__winning
+License: Creative Commons 0 License.
+Source: https://freesound.org/people/unadamlar/sounds/341984/
+Acess: 2nd July 2021.
+
+defeat.wav:
+Original: 364929__jofae__game-die
+License: Creative Commons 0 License.
+Source: https://freesound.org/people/Jofae/sounds/364929/
+Acess: 2nd July 2021.
