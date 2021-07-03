@@ -42,7 +42,6 @@ public class DirectAttackAnimation implements Runnable {
 
 	@Override
 	public void run() {
-		
 		Arrow arrowReference = returnArrowByButton();
 		arrowReference.getArrowLabel().setVisible(true);
 		soundEffectConverter.setFile(soundLocation);
@@ -108,6 +107,7 @@ public class DirectAttackAnimation implements Runnable {
 			button.setBounds(xPos, yPos, (int) 77.76, (int) 113.4);
 			try {Thread.sleep(5);} catch (InterruptedException e) {e.printStackTrace();}
 		}
+
 
 		// ------------------------------------------------------------------------------------
 
