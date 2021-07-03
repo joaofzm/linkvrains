@@ -41,6 +41,7 @@ public class AttackButton implements ActionListener, MouseListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+
 		if (this.getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone1().isOccupied()
 				|| this.getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone2().isOccupied()
 				|| this.getMonsterFieldButton().getDuelFrame().getOpponentMonsterZone3().isOccupied()) {
@@ -79,6 +80,8 @@ public class AttackButton implements ActionListener, MouseListener {
 
 		} else {
 			
+			this.getMonsterFieldButton().getDuelFrame().getPlayerEnablerDisabler().disablePlayer();
+
 			this.getMonsterFieldButton().getDuelFrame().getPlayerMonsterZone1().removeAttackButton();
 			this.getMonsterFieldButton().getDuelFrame().getPlayerMonsterZone2().removeAttackButton();
 			this.getMonsterFieldButton().getDuelFrame().getPlayerMonsterZone3().removeAttackButton();
@@ -97,6 +100,12 @@ public class AttackButton implements ActionListener, MouseListener {
 				public void run() {
 					try {Thread.sleep(2000);} catch (InterruptedException e) {e.printStackTrace();}
 					getMonsterFieldButton().getDuelFrame().setOpponentHp(getMonsterFieldButton().getDuelFrame().getOpponentHp()-getMonsterFieldButton().getPower());
+					if (getMonsterFieldButton().getDuelFrame().getOpponentHp() <= 0) {
+						getMonsterFieldButton().getDuelFrame().setOpponentHp(0);
+						getMonsterFieldButton().getDuelFrame().youWin();
+					} else {
+						getMonsterFieldButton().getDuelFrame().getPlayerEnablerDisabler().enablePlayer();
+					}
 				}
 			}.start();
 
