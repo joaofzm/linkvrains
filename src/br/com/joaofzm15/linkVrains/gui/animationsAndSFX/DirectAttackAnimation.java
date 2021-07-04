@@ -85,21 +85,21 @@ public class DirectAttackAnimation implements Runnable {
 		}
 		
 		if (this.button == duelFrame.getPlayerMonsterZone1().getButton()) {
-			this.duelFrame.getLabelTesteFire().setBounds((int) 683.2, (int) -565, (int) 1000, (int) 1130.4);
+			this.duelFrame.getImpactExplosionlabel().setBounds((int) 683.2, (int) -565, (int) 1000, (int) 1130.4);
 
 		} else if (this.button == duelFrame.getPlayerMonsterZone2().getButton()) {
-			this.duelFrame.getLabelTesteFire().setBounds((int) 796.6, (int) -565, (int) 1000, (int) 1130.4);
+			this.duelFrame.getImpactExplosionlabel().setBounds((int) 796.6, (int) -565, (int) 1000, (int) 1130.4);
 
 		} else if (this.button == duelFrame.getPlayerMonsterZone3().getButton()) {
-			this.duelFrame.getLabelTesteFire().setBounds((int) 910, (int) -565, (int) 1000, (int) 1130.4);
+			this.duelFrame.getImpactExplosionlabel().setBounds((int) 910, (int) -565, (int) 1000, (int) 1130.4);
 		}
 
 		soundEffectConverter.setFile(soundLocation2);
 		soundEffectConverter.play();
-		duelFrame.getLabelTesteFire().setVisible(true);
+		duelFrame.getImpactExplosionlabel().setVisible(true);
 		try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
 		yPos -= 30; // Cancel Recoil
-		duelFrame.getLabelTesteFire().setVisible(false);
+		duelFrame.getImpactExplosionlabel().setVisible(false);
 
 		// Back
 		for (int i = 0; i < 60; i++) {
