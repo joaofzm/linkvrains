@@ -196,12 +196,12 @@ public class DuelFrame extends JFrame implements ActionListener {
 	}
 //=========================================================================
 
-	private JFrame frame = new JFrame();
+	private JFrame frame;
 	public JFrame getFrame() {
 		return frame;
 	}
 
-	private JLabel drawCardAnimationLabel = new JLabel();
+	private JLabel drawCardAnimationLabel;
 
 	public JLabel getDrawCardAnimationLabel() {
 		return drawCardAnimationLabel;
@@ -369,15 +369,16 @@ public class DuelFrame extends JFrame implements ActionListener {
 //	JButton buttonTest3;
 //	JButton buttonTest4;
 
-	public JLabel labelTesteFire;
+	public JLabel impactExplosionLabel;
 
-	public JLabel getLabelTesteFire() {
-		return labelTesteFire;
+	public JLabel getImpactExplosionlabel() {
+		return impactExplosionLabel;
 	}
-	public JLabel bloom;
 
-	public JLabel getBloom() {
-		return bloom;
+	public JLabel summonAnimationLabel;
+
+	public JLabel getSummonAnimationLabel() {
+		return summonAnimationLabel;
 	}
 	// ================================Test Buttons
 
@@ -440,11 +441,12 @@ public class DuelFrame extends JFrame implements ActionListener {
 		playerDeck = new PlayerDeck();
 		opponentDeck = new OpponentDeck();
 
+		frame = new JFrame();
 		frame.setContentPane(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("window backgrounds/boardBackground.jpg"))));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
-		ImageIcon yusaku = new ImageIcon(StartMenu.class.getResource("yuseiIcon.jpg"));
-		frame.setIconImage(yusaku.getImage());
+		ImageIcon windowIcon = new ImageIcon(getClass().getClassLoader().getResource("window icon/windowIcon.jpg"));
+		frame.setIconImage(windowIcon.getImage());
 		frame.setTitle("Link Vrains");
 		frame.setResizable(false);
 		frame.setSize(1280, 720);
@@ -465,14 +467,14 @@ public class DuelFrame extends JFrame implements ActionListener {
 
 		youWinLabel = new JLabel();
 		youWinLabel.setBounds(0, 0, 1280, 720);
-		ImageIcon winMessageGif = new ImageIcon("resources/messages/youWin.gif");
+		ImageIcon winMessageGif = new ImageIcon(getClass().getClassLoader().getResource("messages/youWin.gif"));
 		youWinLabel.setIcon(winMessageGif);
 		youWinLabel.setVisible(false);
 		frame.add(youWinLabel);
 
 		youLoseLabel = new JLabel();
 		youLoseLabel.setBounds(0, 0, 1280, 720);
-		ImageIcon LoseMessageGif = new ImageIcon("resources/messages/youLose.gif");
+		ImageIcon LoseMessageGif = new ImageIcon(getClass().getClassLoader().getResource("messages/youLose.gif"));
 		youLoseLabel.setIcon(LoseMessageGif);
 		youLoseLabel.setVisible(false);
 		frame.add(youLoseLabel);
@@ -546,50 +548,51 @@ public class DuelFrame extends JFrame implements ActionListener {
 
 
 		// ========================Attack Arrows====================================
-		ArrowPlayer10 = new Arrow(this, "resources/arrows/1-0.png");
-		ArrowPlayer11 = new Arrow(this, "resources/arrows/1-1.png");
-		ArrowPlayer12 = new Arrow(this, "resources/arrows/1-2.png");
-		ArrowPlayer13 = new Arrow(this, "resources/arrows/1-3.png");
-		ArrowPlayer20 = new Arrow(this, "resources/arrows/2-0.png");
-		ArrowPlayer21 = new Arrow(this, "resources/arrows/2-1.png");
-		ArrowPlayer22 = new Arrow(this, "resources/arrows/2-2.png");
-		ArrowPlayer23 = new Arrow(this, "resources/arrows/2-3.png");
-		ArrowPlayer30 = new Arrow(this, "resources/arrows/3-0.png");
-		ArrowPlayer31 = new Arrow(this, "resources/arrows/3-1.png");
-		ArrowPlayer32 = new Arrow(this, "resources/arrows/3-2.png");
-		ArrowPlayer33 = new Arrow(this, "resources/arrows/3-3.png");
+		ArrowPlayer10 = new Arrow(this, "arrows/1-0.png");
+		ArrowPlayer11 = new Arrow(this, "arrows/1-1.png");
+		ArrowPlayer12 = new Arrow(this, "arrows/1-2.png");
+		ArrowPlayer13 = new Arrow(this, "arrows/1-3.png");
+		ArrowPlayer20 = new Arrow(this, "arrows/2-0.png");
+		ArrowPlayer21 = new Arrow(this, "arrows/2-1.png");
+		ArrowPlayer22 = new Arrow(this, "arrows/2-2.png");
+		ArrowPlayer23 = new Arrow(this, "arrows/2-3.png");
+		ArrowPlayer30 = new Arrow(this, "arrows/3-0.png");
+		ArrowPlayer31 = new Arrow(this, "arrows/3-1.png");
+		ArrowPlayer32 = new Arrow(this, "arrows/3-2.png");
+		ArrowPlayer33 = new Arrow(this, "arrows/3-3.png");
 
-		ArrowOpponent10 = new Arrow(this, "resources/arrows/f1-0.png");
-		ArrowOpponent11 = new Arrow(this, "resources/arrows/f1-1.png");
-		ArrowOpponent12 = new Arrow(this, "resources/arrows/f1-2.png");
-		ArrowOpponent13 = new Arrow(this, "resources/arrows/f1-3.png");
-		ArrowOpponent20 = new Arrow(this, "resources/arrows/f2-0.png");
-		ArrowOpponent21 = new Arrow(this, "resources/arrows/f2-1.png");
-		ArrowOpponent22 = new Arrow(this, "resources/arrows/f2-2.png");
-		ArrowOpponent23 = new Arrow(this, "resources/arrows/f2-3.png");
-		ArrowOpponent30 = new Arrow(this, "resources/arrows/f3-0.png");
-		ArrowOpponent31 = new Arrow(this, "resources/arrows/f3-1.png");
-		ArrowOpponent32 = new Arrow(this, "resources/arrows/f3-2.png");
-		ArrowOpponent33 = new Arrow(this, "resources/arrows/f3-3.png");
+		ArrowOpponent10 = new Arrow(this, "arrows/f1-0.png");
+		ArrowOpponent11 = new Arrow(this, "arrows/f1-1.png");
+		ArrowOpponent12 = new Arrow(this, "arrows/f1-2.png");
+		ArrowOpponent13 = new Arrow(this, "arrows/f1-3.png");
+		ArrowOpponent20 = new Arrow(this, "arrows/f2-0.png");
+		ArrowOpponent21 = new Arrow(this, "arrows/f2-1.png");
+		ArrowOpponent22 = new Arrow(this, "arrows/f2-2.png");
+		ArrowOpponent23 = new Arrow(this, "arrows/f2-3.png");
+		ArrowOpponent30 = new Arrow(this, "arrows/f3-0.png");
+		ArrowOpponent31 = new Arrow(this, "arrows/f3-1.png");
+		ArrowOpponent32 = new Arrow(this, "arrows/f3-2.png");
+		ArrowOpponent33 = new Arrow(this, "arrows/f3-3.png");
 		// ========================Attack Arrows====================================
 
 
 
-		labelTesteFire = new JLabel();
-		getLabelTesteFire().setBounds((int) 910, (int) -345, (int) 1000, (int) 1130.4);
-		ImageIcon fire = new ImageIcon(StartMenu.class.getResource("fire.gif"));
-		getLabelTesteFire().setIcon(fire);
-		getLabelTesteFire().setVisible(false);
-		frame.add(getLabelTesteFire());
+		impactExplosionLabel = new JLabel();
+		getImpactExplosionlabel().setBounds((int) 910, (int) -345, (int) 1000, (int) 1130.4);
+		ImageIcon impactExplosionIcon = new ImageIcon(getClass().getClassLoader().getResource("visual effects/impactExplosion.gif"));
+		getImpactExplosionlabel().setIcon(impactExplosionIcon);
+		getImpactExplosionlabel().setVisible(false);
+		frame.add(getImpactExplosionlabel());
 
-		bloom = new JLabel();
-		getBloom().setBounds((int) 813, (int) 350, (int) 77, (int) 113);
-		ImageIcon bloomIcon = new ImageIcon(StartMenu.class.getResource("bloom.gif"));
-		getBloom().setIcon(bloomIcon);
-		getBloom().setVisible(false);
-		frame.add(getBloom());
+		summonAnimationLabel = new JLabel();
+		getSummonAnimationLabel().setBounds((int) 813, (int) 350, (int) 77, (int) 113);
+		ImageIcon summonAnimationIcon = new ImageIcon(getClass().getClassLoader().getResource("visual effects/summonAnimation.gif"));
+		getSummonAnimationLabel().setIcon(summonAnimationIcon);
+		getSummonAnimationLabel().setVisible(false);
+		frame.add(getSummonAnimationLabel());
 
 		//Used solely for the draw card animation.
+		drawCardAnimationLabel = new JLabel();
 		drawCardAnimationLabel.setVisible(false);
 		frame.add(drawCardAnimationLabel);
 
@@ -645,8 +648,6 @@ public class DuelFrame extends JFrame implements ActionListener {
 		opponentMonsterZone1 = new OpponentMonsterFieldButton(this, (int) 1040, (int) 156.6);
 		opponentMonsterZone1.getButton().setBackground(Color.black);
 		opponentMonsterZone1.getButton().setBorder(BorderFactory.createLineBorder(new Color(255, 104, 0)));
-
-//		opponentMonsterZone1.setIcons(this.getOpponentMonsterZone1().getImageIconFromCard(opponentDeck.getDeckArrayList().get(4)));
 
 		// 2
 		opponentMonsterZone2 = new OpponentMonsterFieldButton(this, (int) 926.6, (int) 156.6);
