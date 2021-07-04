@@ -27,8 +27,8 @@ public class StartMenu extends JFrame implements ActionListener {
 		frame.setContentPane(new JLabel(new ImageIcon(getClass().getClassLoader().getResource("window backgrounds/mainMenuBackground.jpg"))));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
-		ImageIcon yusaku = new ImageIcon(StartMenu.class.getResource("yuseiIcon.jpg"));
-		frame.setIconImage(yusaku.getImage());
+		ImageIcon windowIcon = new ImageIcon(getClass().getClassLoader().getResource("window icon/windowIcon.jpg"));
+		frame.setIconImage(windowIcon.getImage());
 		frame.setTitle("Link Vrains");
 		frame.setResizable(false);
 		frame.setSize(1280, 720);
