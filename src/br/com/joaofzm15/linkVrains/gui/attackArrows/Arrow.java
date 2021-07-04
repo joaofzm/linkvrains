@@ -22,7 +22,7 @@ public class Arrow {
 		this.duelFrame = duelFrame;
 		arrowLabel = new JLabel();
 		arrowLabel.setBounds(0, 0, 1280, 720);
-		ImageIcon arrowImage = new ImageIcon(path);
+		ImageIcon arrowImage = new ImageIcon(getClass().getClassLoader().getResource(path));
 		arrowLabel.setIcon(arrowImage);
 		arrowLabel.setVisible(false);
 		duelFrame.getFrame().add(arrowLabel);
