@@ -12,7 +12,7 @@ public class ActivateAnimation implements Runnable {
 
 
 	private SoundEffectConverter soundEffectConverter = new SoundEffectConverter();
-	String soundPath = "resources/sound effects/activate.wav";
+	String soundPath = "/sound effects/activate.wav";
 
 	public ActivateAnimation(DuelFrame duelFrame) {
 		this.duelFrame = duelFrame;
