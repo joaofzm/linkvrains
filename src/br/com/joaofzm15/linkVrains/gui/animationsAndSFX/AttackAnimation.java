@@ -23,8 +23,8 @@ public class AttackAnimation implements Runnable {
 		this.duelFrame = df;
 		this.button = button;
 		this.target = target;
-		soundLocation = "resources/sound effects/attack.wav";
-		soundLocation2 = "resources/sound effects/impact.wav";
+		soundLocation = "/sound effects/attack.wav";
+		soundLocation2 = "/sound effects/impact.wav";
 	}
 
 	public Arrow returnArrowByButtonAndTarget() {
