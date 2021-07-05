@@ -9,7 +9,7 @@ public class RoundPassTextAnimation implements Runnable {
 	private DuelFrame duelFrame;
 
 	private SoundEffectConverter soundEffectConverter = new SoundEffectConverter();
-	String soundPath = "resources/sound effects/nextRound.wav";
+	String soundPath = "/sound effects/nextRound.wav";
 
 	public RoundPassTextAnimation(DuelFrame duelFrame) {
 		this.duelFrame = duelFrame;
