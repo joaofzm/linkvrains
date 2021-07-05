@@ -3,7 +3,7 @@ package br.com.joaofzm15.linkVrains.gui.animationsAndSFX;
 public class VictorySound implements Runnable {
 
 	private SoundEffectConverter soundEffectConverter = new SoundEffectConverter();
-	String soundPath = "resources/sound effects/victory.wav";
+	String soundPath = "/sound effects/victory.wav";
 
 
 	@Override
