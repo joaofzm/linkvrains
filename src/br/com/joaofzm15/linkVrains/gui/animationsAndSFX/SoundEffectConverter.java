@@ -1,7 +1,5 @@
 package br.com.joaofzm15.linkVrains.gui.animationsAndSFX;
 
-import java.io.File;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -17,14 +15,13 @@ public class SoundEffectConverter {
 
 	public void setFile(String soundFileName) {
 		try {
-			File file = new File(soundFileName);
-			AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+			AudioInputStream sound = AudioSystem.getAudioInputStream(getClass().getResource(soundFileName));
 			clip = AudioSystem.getClip();
 			clip.open(sound);
 			FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 			volume.setValue(-15);
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
