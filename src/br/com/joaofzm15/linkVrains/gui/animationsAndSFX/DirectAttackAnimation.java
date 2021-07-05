@@ -21,8 +21,8 @@ public class DirectAttackAnimation implements Runnable {
 	public DirectAttackAnimation(DuelFrame df, JButton button) {
 		this.duelFrame = df;
 		this.button = button;
-		soundLocation = "resources/sound effects/attack.wav";
-		soundLocation2 = "resources/sound effects/impact.wav";
+		soundLocation = "/sound effects/attack.wav";
+		soundLocation2 = "/sound effects/impact.wav";
 	}
 
 	public Arrow returnArrowByButton() {
