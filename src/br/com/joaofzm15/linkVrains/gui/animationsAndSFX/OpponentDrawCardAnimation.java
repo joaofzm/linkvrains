@@ -15,7 +15,7 @@ public class OpponentDrawCardAnimation implements Runnable {
 
 	public OpponentDrawCardAnimation(DuelFrame df) {
 		this.duelFrame = df;
-		soundPath = "resources/sound effects/draw.wav";
+		soundPath = "/sound effects/draw.wav";
 	}
 
 	@Override
