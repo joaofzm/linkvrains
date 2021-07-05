@@ -4,7 +4,7 @@ public class MenuBackgroundMusic implements Runnable {
 
 	private SoundEffectConverter soundEffectConverter = new SoundEffectConverter();
 
-	String soundPath = "resources/sound effects/menu bgmusic.wav";
+	String soundPath = "/sound effects/menu bgmusic.wav";
 
 	/*
 	 * The Thread runs a infinity loop that sleeps for 194000 milliseconds, which is
