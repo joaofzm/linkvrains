@@ -11,7 +11,7 @@ public class SummonAnimation implements Runnable {
 	}
 
 	private SoundEffectConverter soundEffectConverter = new SoundEffectConverter();
-	String soundPath = "resources/sound effects/summon.wav";
+	String soundPath = "/sound effects/summon.wav";
 
 	public SummonAnimation(DuelFrame duelFrame, int xPos, int yPos) {
 		this.duelFrame = duelFrame;
